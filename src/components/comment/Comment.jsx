@@ -1,21 +1,14 @@
-import { DiscussionEmbed } from "disqus-react";
+import { useEffect } from "react";
 
-const Comment = ({ id, title, content }) => {
-  const disqusShortname = "nagumo-birthday"; // ex: myblog
-  const disqusConfig = {
-    url: `https://nyun2024.github.io/nagumo_birthday/${id}`, // 현재 페이지의 전체 URL
-    identifier: id.toString(), // 고유한 식별자 (보통 포스트 ID)
-    title: title,
-  };
+const Comment = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.commento.io/js/commento.js";
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
 
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>{content}</p>
-
-      <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-    </div>
-  );
+  return <div id="commento"></div>;
 };
 
 export default Comment;
