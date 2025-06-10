@@ -9,7 +9,7 @@ const router = createHashRouter(
     },
   ],
   {
-    basename: "/nagumo_birthday",
+    basename: "/nagumo_birthday/",
   }
 );
 
