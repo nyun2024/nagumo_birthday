@@ -67,4 +67,4 @@ Please change the parent <Route path="${K}"> to <Route path="${K==="/"?"*":`${K}
  * LICENSE.md file in the root directory of this source tree.
  *
  * @license MIT
- */function Zg(i){return w.createElement(ug,{flushSync:Vg.flushSync,...i})}const Kg=()=>(w.useEffect(()=>{const i=document.createElement("script");i.src="https://cdn.commento.io/js/commento.js",i.defer=!0,document.body.appendChild(i)},[]),Tn.jsx("div",{id:"commento"})),Jg=()=>Tn.jsxs("div",{children:[Tn.jsx("p",{children:"나구모 생일~"}),Tn.jsx(Kg,{})]}),$g=Cg([{path:"/",element:Tn.jsx(Jg,{})}],{basename:"/"});qy.createRoot(document.getElementById("root")).render(Tn.jsx(Zg,{router:$g}));
+ */function Zg(i){return w.createElement(ug,{flushSync:Vg.flushSync,...i})}const Kg=()=>(w.useEffect(()=>{const i=document.createElement("script");i.src="https://cdn.commento.io/js/commento.js",i.defer=!0,document.body.appendChild(i)},[]),Tn.jsx("div",{id:"commento"})),Jg=()=>Tn.jsxs("div",{children:[Tn.jsx("p",{children:"나구모 생일~"}),Tn.jsx(Kg,{})]}),$g=Cg([{path:"/",element:Tn.jsx(Jg,{})}],{basename:"/nagumo_birthday"});qy.createRoot(document.getElementById("root")).render(Tn.jsx(Zg,{router:$g}));
