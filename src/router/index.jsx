@@ -8,7 +8,9 @@ const router = createHashRouter(
       element: <Home />,
     },
   ],
-  { basename: "/" }
+  {
+    basename: "/nagumo_birthday",
+  }
 );
 
 export default router;
