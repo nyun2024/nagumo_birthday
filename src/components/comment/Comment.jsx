@@ -1,23 +1,17 @@
-import { useEffect } from "react";
+import { ReactCusdis } from "react-cusdis";
+import styles from "./Comment.module.scss";
 
 const Comment = () => {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cusdis.com/js/cusdis.es.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }, []);
-
   return (
-    <div
-      id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="c379c40f-a933-4309-9479-7c7eec724451"
-      data-page-id="home"
-      data-page-url={window.location.href}
-      data-page-title="나구모 생일"
-    ></div>
+    <ReactCusdis
+      attrs={{
+        host: "https://cusdis.com",
+        appId: "c379c40f-a933-4309-9479-7c7eec724451",
+        pageId: "home",
+        pageTitle: "나구모 생일",
+        pageUrl: window.location.href,
+      }}
+    />
   );
 };
 
