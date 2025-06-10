@@ -1,20 +1,23 @@
-import { DiscussionEmbed } from "disqus-react";
+import { useEffect } from "react";
 
-const Comment = ({ id, title, content }) => {
-  const disqusShortname = "nagumo-birthday"; // ex: myblog
-  const disqusConfig = {
-    url: `https://nyun2024.github.io/nagumo_birthday/${id}`, // 현재 페이지의 전체 URL
-    identifier: id.toString(), // 고유한 식별자 (보통 포스트 ID)
-    title: title,
-  };
+const Comment = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cusdis.com/js/cusdis.es.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>{content}</p>
-
-      <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-    </div>
+    <div
+      id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="c379c40f-a933-4309-9479-7c7eec724451"
+      data-page-id="home"
+      data-page-url={window.location.href}
+      data-page-title="나구모 생일"
+    ></div>
   );
 };
 
