@@ -1,12 +1,7 @@
-import Comment from "@components/comment/Comment";
+import Container from "../../components/common/Container";
 
 const Home = () => {
-  return (
-    <div>
-      <p>나구모 생일~</p>
-      <Comment />
-    </div>
-  );
+  return <Container isHome={true}></Container>;
 };
 
 export default Home;

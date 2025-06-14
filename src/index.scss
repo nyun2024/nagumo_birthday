@@ -56,6 +56,15 @@
 @font-face {
   font-family: "HelveticaNeue";
   src:
+    url("/fonts/HelveticaNeue/HelveticaNeueRegular.woff2") format("woff2"),
+    url("/fonts/HelveticaNeue/HelveticaNeueRegular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+/* HelveticaNeue - Medium */
+@font-face {
+  font-family: "HelveticaNeue";
+  src:
     url("/fonts/HelveticaNeue/HelveticaNeueMedium.woff2") format("woff2"),
     url("/fonts/HelveticaNeue/HelveticaNeueMedium.woff") format("woff");
   font-weight: 500;
@@ -71,7 +80,11 @@
   font-style: normal;
 }
 
-// reset
+:root {
+  --bg-color: #fff;
+  --font-color: #000;
+  --parallax-bg: #000;
+}
 html,
 body,
 div,
@@ -172,9 +185,18 @@ body {
     "돋움",
     Apple SD Gothic Neo,
     sans-serif;
-  color: #222;
 }
-
+html {
+  background-color: #fff;
+  color: #000;
+}
+html.dark {
+  background-color: #000;
+  color: #fff;
+  --bg-color: #000;
+  --font-color: #fff;
+  --parallax-bg: #3d0100;
+}
 article,
 aside,
 details,
@@ -286,4 +308,16 @@ textarea {
 
 * {
   box-sizing: border-box;
+}
+.blind {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
 }

@@ -1,0 +1,28 @@
+@use "../../assets/styles/mixin.scss" as *;
+@use "../../assets/styles/variables.scss" as *;
+
+.footer {
+  padding: 20px 20px 30px 20px;
+  display: block;
+  p {
+    margin-bottom: 2px;
+  }
+  p,
+  a {
+    @include font-style($font-eng, 12px, 400, var(--font-color));
+  }
+}
+
+// pc
+.pc.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    margin-bottom: 0;
+  }
+  p,
+  a {
+    font-size: 14px;
+  }
+}

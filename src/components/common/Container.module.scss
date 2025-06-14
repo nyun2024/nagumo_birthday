@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.homeContainer.container {
+  .contents {
+    padding: 20px 0 100px;
+  }
+}
