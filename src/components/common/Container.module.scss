@@ -6,6 +6,11 @@
 
 .homeContainer.container {
   .contents {
-    padding: 20px 0 100px;
+    padding: 68px 0 100px;
+  }
+  &.pc {
+    .contents {
+      padding: 92px 0 100px;
+    }
   }
 }

@@ -4,7 +4,6 @@
 .homeMainContainer {
   padding: 0 13px;
 }
-
 .sectionVideo {
   display: flex;
   flex-direction: column;
@@ -46,7 +45,7 @@
   margin-bottom: 10%;
   h3 {
     span {
-      @include font-style($font-eng, 38px, 500, $red);
+      font-weight: 500;
       margin-right: 3px;
     }
     @include font-style($font-eng, 38px, 500, $red);
@@ -87,6 +86,7 @@
   .miniBox {
     width: calc(25% - 3.5px);
     border: 1px solid #000;
+    object-fit: cover;
   }
   .paperLongBox {
     width: calc(75% - 3.5px);
@@ -96,6 +96,7 @@
     overflow: visible;
     .paperBg {
       width: 100%;
+      object-fit: cover;
     }
     .nagumo {
       width: 75%;
@@ -105,7 +106,6 @@
     }
   }
 }
-
 .sectionPart3 {
   display: flex;
   justify-content: space-between;
@@ -113,9 +113,67 @@
   .miniBox {
     width: calc(25% - 3.5px);
     border: 1px solid #000;
+    object-fit: cover;
   }
   .longBox {
     width: calc(75% - 3.5px);
     border: 1px solid #000;
+    object-fit: cover;
+  }
+}
+
+// pc
+.pc.homeMainContainer {
+  .sectionVideo {
+    flex-direction: column-reverse;
+  }
+  .mainTitle {
+    align-items: center;
+    flex-direction: column-reverse;
+    margin: 0 0 4px 0;
+    img {
+      width: 100%;
+    }
+  }
+  .imgMiniBoxs {
+    margin: 7px 0 12px;
+    img {
+      width: calc(25% - 9px);
+      height: 140px;
+    }
+  }
+  .sectionPart2 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    height: 166px;
+    .miniBox {
+      width: calc(25% - 6px);
+    }
+    .paperLongBox {
+      width: calc(75% - 6px);
+      z-index: 1;
+      .paperBg {
+        width: 100%;
+      }
+      .nagumo {
+        width: 68%;
+        position: absolute;
+        bottom: 0;
+        right: -70px;
+      }
+      .pcNagumoName {
+        position: absolute;
+        transform: translateY(-50%);
+        top: 48%;
+        left: 36px;
+        img {
+          width: 27%;
+        }
+        img + img {
+          margin-left: 8px;
+        }
+      }
+    }
   }
 }

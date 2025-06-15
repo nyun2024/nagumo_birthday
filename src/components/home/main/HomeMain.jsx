@@ -13,6 +13,7 @@ import nameJapen02_light from "@img/home/main/nagumo_name02_light.png";
 import paperBox_dark from "@img/home/main/main_paper_box_dark.png";
 import paperBox_light from "@img/home/main/main_paper_box_light.png";
 import nagumo from "@img/home/main/main_nagumo.png";
+import pcTitle from "@img/home/main/main_pc_title.png";
 import longBox from "@img/home/main/main_longBox.png";
 import useDarkMode from "@utils/useDarkMode";
 
@@ -58,10 +59,16 @@ const HomeMain = ({ mobile }) => {
           })}
         </div>
         <div className={styles.mainTitle}>
-          <h3>
-            <span>Nagumo</span>Yoichi{mobile ? <br /> : " "}Days
-          </h3>
-          <p>Happy Birthday{mobile ? <br /> : " "}1995.07.09</p>
+          {mobile ? (
+            <>
+              <h3>
+                <span>Nagumo</span>Yoichi{mobile ? <br /> : " "}Days
+              </h3>
+              <p>Happy Birthday{mobile ? <br /> : " "}1995.07.09</p>
+            </>
+          ) : (
+            <img src={pcTitle} alt="" />
+          )}
         </div>
       </div>
       <div className={styles.sectionPart2}>
@@ -78,8 +85,16 @@ const HomeMain = ({ mobile }) => {
         ) : (
           <img src={mini05} className={styles.miniBox} alt="" />
         )}
-        <div className={styles.paperLongBox} data-ddd="sss">
+        <div className={styles.paperLongBox}>
           <img src={nagumo} className={styles.nagumo} alt="nagumo" />
+          {!mobile ? (
+            <div className={styles.pcNagumoName}>
+              <img src={nameJapen01_light} alt="" />
+              <img src={nameJapen02_light} alt="" />
+            </div>
+          ) : (
+            ""
+          )}
           <img
             src={isDark ? paperBox_dark : paperBox_light}
             className={styles.paperBg}

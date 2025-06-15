@@ -1,12 +1,24 @@
 .header {
   width: 100%;
+  max-width: 1000px;
   height: 48px;
   background-color: var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px 0 13px;
+  position: fixed;
+  top: 0;
+  transition: transform 0.3s ease;
+  z-index: 999;
 }
+.visible {
+  transform: translateY(0%);
+}
+.hidden {
+  transform: translateY(-100%);
+}
+
 .btnMenu {
   width: 34px;
   height: 34px;
