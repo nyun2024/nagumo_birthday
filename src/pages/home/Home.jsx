@@ -1,7 +1,15 @@
-import Container from "../../components/common/Container";
+import Container from "@components/common/Container";
+import HomeMain from "@components/home/main/HomeMain";
+import useIsMobile from "@utils/useIsMobile";
 
 const Home = () => {
-  return <Container isHome={true}></Container>;
+  const isMobile = useIsMobile();
+
+  return (
+    <Container isHome={true}>
+      <HomeMain mobile={isMobile} />
+    </Container>
+  );
 };
 
 export default Home;

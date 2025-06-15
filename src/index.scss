@@ -1,12 +1,3 @@
-/* EuropaGroteskSH */
-@font-face {
-  font-family: "EuropaGroteskSH";
-  src:
-    url("/fonts/EuropaGroteskSH/EuropaGroteskSH-Med.woff2") format("woff2"),
-    url("/fonts/EuropaGroteskSH/EuropaGroteskSH-Med.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
 /* GenRyuMin */
 @font-face {
   font-family: "GenRyuMin";
@@ -56,17 +47,8 @@
 @font-face {
   font-family: "HelveticaNeue";
   src:
-    url("/fonts/HelveticaNeue/HelveticaNeueRegular.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue/HelveticaNeueRegular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-/* HelveticaNeue - Medium */
-@font-face {
-  font-family: "HelveticaNeue";
-  src:
-    url("/fonts/HelveticaNeue/HelveticaNeueMedium.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue/HelveticaNeueMedium.woff") format("woff");
+    url("/fonts/HelveticaNeue/HelveticaNeue-Medium.woff2") format("woff2"),
+    url("/fonts/HelveticaNeue/HelveticaNeue-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
@@ -74,8 +56,8 @@
 @font-face {
   font-family: "HelveticaNeue";
   src:
-    url("/fonts/HelveticaNeue/HelveticaNeueBold.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue/HelveticaNeueBold.woff") format("woff");
+    url("/fonts/HelveticaNeue/HelveticaNeue-Bold.woff2") format("woff2"),
+    url("/fonts/HelveticaNeue/HelveticaNeue-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
@@ -185,6 +167,9 @@ body {
     "돋움",
     Apple SD Gothic Neo,
     sans-serif;
+  -webkit-font-smoothing: antialiased; /* MacOS */
+  -moz-osx-font-smoothing: grayscale; /* Firefox */
+  text-rendering: optimizeLegibility;
 }
 html {
   background-color: #fff;

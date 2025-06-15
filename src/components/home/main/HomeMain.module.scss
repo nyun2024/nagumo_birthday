@@ -1,0 +1,121 @@
+@use "../../../assets/styles/mixin.scss" as *;
+@use "../../../assets/styles/variables.scss" as *;
+
+.homeMainContainer {
+  padding: 0 13px;
+}
+
+.sectionVideo {
+  display: flex;
+  flex-direction: column;
+}
+.mainVideo {
+  width: 100%;
+  border: 1px solid #000;
+}
+.imgMiniBoxs {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 7px 0 10px;
+  position: relative;
+  z-index: -1;
+  img {
+    width: calc(25% - 5.25px);
+    border: 1px solid #000;
+    object-fit: cover;
+  }
+  .nameJapen {
+    width: calc(25% - 5.25px);
+    background-size: 72%;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    &.dark {
+      background-color: #fff;
+    }
+    &.light {
+      background-color: #000;
+    }
+  }
+}
+.mainTitle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10%;
+  h3 {
+    span {
+      @include font-style($font-eng, 38px, 500, $red);
+      margin-right: 3px;
+    }
+    @include font-style($font-eng, 38px, 500, $red);
+    letter-spacing: -2.5px;
+    line-height: 35px;
+    flex-shrink: 0;
+  }
+  p {
+    @include font-style($font-eng, 12px, 500, $red);
+    letter-spacing: -0.5px;
+    line-height: 15px;
+    text-align: right;
+    margin-top: 2px;
+  }
+  @media (max-width: 359px) {
+    flex-direction: column;
+    p {
+      text-align: left;
+      margin-top: 10px;
+    }
+  }
+}
+.sectionPart2 {
+  display: flex;
+  justify-content: space-between;
+  .nameJapen {
+    width: calc(25% - 3.5px);
+    background-size: 68%;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    &.dark {
+      background-color: #fff;
+    }
+    &.light {
+      background-color: #000;
+    }
+  }
+  .miniBox {
+    width: calc(25% - 3.5px);
+    border: 1px solid #000;
+  }
+  .paperLongBox {
+    width: calc(75% - 3.5px);
+    display: flex;
+    position: relative;
+    z-index: -1;
+    overflow: visible;
+    .paperBg {
+      width: 100%;
+    }
+    .nagumo {
+      width: 75%;
+      position: absolute;
+      bottom: 0;
+      right: -13px;
+    }
+  }
+}
+
+.sectionPart3 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  .miniBox {
+    width: calc(25% - 3.5px);
+    border: 1px solid #000;
+  }
+  .longBox {
+    width: calc(75% - 3.5px);
+    border: 1px solid #000;
+  }
+}

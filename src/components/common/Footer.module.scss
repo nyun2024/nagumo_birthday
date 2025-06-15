@@ -9,7 +9,7 @@
   }
   p,
   a {
-    @include font-style($font-eng, 12px, 400, var(--font-color));
+    @include font-style($font-eng, 12px, 500, var(--font-color));
   }
 }
 
