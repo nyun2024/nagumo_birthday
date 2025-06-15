@@ -1,0 +1,60 @@
+@use "../../../assets/styles/mixin.scss" as *;
+@use "../../../assets/styles/variables.scss" as *;
+
+.parallaxContainer {
+  transition: background-color 0.5s ease;
+}
+.bgDark {
+  background-color: var(--parallax-bg);
+}
+section {
+  position: relative;
+}
+
+.bigWrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: relative;
+  z-index: 10;
+}
+.fadeIn {
+  opacity: 1;
+}
+.bigImg {
+  // display: none;
+  // opacity: 0;
+}
+.smallImg {
+  position: absolute;
+}
+
+.section01,
+.section02 {
+  .bigWrap {
+    margin-top: 13.5%;
+  }
+  .bigImg {
+    width: 85%;
+    position: relative;
+    z-index: 1;
+    transform: translateX(27%);
+  }
+  .small01 {
+    width: 70%;
+    right: 6%;
+    top: -10%;
+  }
+  .small02 {
+    width: 37%;
+    left: 3%;
+    top: 55%;
+  }
+  .small03 {
+    width: 30%;
+    right: 10%;
+    top: 33%;
+  }
+}

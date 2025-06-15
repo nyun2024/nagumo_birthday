@@ -28,13 +28,6 @@ const HomeMain = ({ mobile }) => {
       isNameJapen: mobile ? true : false,
     },
   ];
-  const part2Boxs = [
-    {
-      src: mobile ? (isDark ? nameJapen02_dark : nameJapen02_light) : mini05,
-      isNameJapen: mobile ? true : false,
-    },
-    { src: isDark ? paperBox_dark : paperBox_light },
-  ];
   return (
     <div
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
