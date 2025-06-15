@@ -39,14 +39,9 @@ const HomeMain = ({ mobile }) => {
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        <video
-          src={video}
-          className={styles.mainVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <video autoPlay loop muted playsInline className={styles.mainVideo}>
+          <source src={video} type="video/mp4"></source>
+        </video>
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
             return item.isNameJapen ? (
