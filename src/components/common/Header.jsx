@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 
-const Header = ({ mobile }) => {
+const Header = ({ mobile, isParallax }) => {
   const [isDark, setIsDark] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
@@ -49,9 +49,10 @@ const Header = ({ mobile }) => {
     <header
       className={classNames(
         styles.header,
-        mobile ? "" : styles.pc,
-        isDark ? styles.dark : "",
-        isVisible ? styles.visible : styles.hidden
+        !mobile && styles.pc,
+        isDark && styles.dark,
+        isVisible ? styles.visible : styles.hidden,
+        isParallax && styles.isParallax
       )}
     >
       <button type="button" className={styles.btnMenu}>

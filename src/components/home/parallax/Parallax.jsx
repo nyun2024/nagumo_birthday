@@ -6,6 +6,7 @@ import sec01_3 from "@img/home/parallax/parallax_section01_3.png";
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import useDarkMode from "@utils/useDarkMode";
+
 const sectionImg = {
   sec01: {
     big: [sec01_big],
@@ -19,7 +20,7 @@ const sectionImg = {
   },
 };
 
-const Parallax = () => {
+const Parallax = ({ setIsParallax }) => {
   const [visibleBigImgs, setVisibleBigImgs] = useState({});
   const [typedTexts, setTypedTexts] = useState({});
   const containerRef = useRef(null);
@@ -39,6 +40,7 @@ const Parallax = () => {
       isIntersecting
         ? document.querySelector("html").classList.add("parallax")
         : document.querySelector("html").classList.remove("parallax");
+      isIntersecting ? setIsParallax(true) : setIsParallax(false);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll);
@@ -47,6 +49,7 @@ const Parallax = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
       document.querySelector("html").classList.remove("parallax");
+      setIsParallax(false);
     };
   }, []);
 
@@ -60,8 +63,8 @@ const Parallax = () => {
         const rect = el.getBoundingClientRect();
         const id = el.getAttribute("data-id");
 
-        // 조건: 요소의 상단이 화면 위에서 40% 이내에 들어오면
-        if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= 0 && id) {
+        // 조건: 요소의 상단이 화면 위에서 50% 이내에 들어오면
+        if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= 0 && id) {
           newVisible[id] = true;
         }
       });
@@ -112,7 +115,7 @@ const Parallax = () => {
   // smallImg 스크롤 이질감
   useEffect(() => {
     const handleScroll = () => {
-      Object.entries(smallImgRefs.current).forEach(([key, el]) => {
+      Object.entries(smallImgRefs.current).forEach(([, el]) => {
         if (!el) return;
 
         const speed = Number(el.dataset.speed) || 0.2;

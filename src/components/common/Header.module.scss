@@ -28,6 +28,9 @@
 .dark .btnMenu {
   background-image: url(../../assets/img/common/icon_menu_dark.png);
 }
+.isParallax:not(.dark) .btnMenu {
+  background-image: url(../../assets/img/common/icon_menu_dark.png);
+}
 
 .linkHome {
   display: block;
@@ -37,6 +40,9 @@
   background-size: cover;
 }
 .dark .linkHome {
+  background-image: url(../../assets/img/common/header_title_dark.png);
+}
+.isParallax:not(.dark) .linkHome {
   background-image: url(../../assets/img/common/header_title_dark.png);
 }
 
@@ -98,6 +104,9 @@
     background-size: cover;
     z-index: 9;
   }
+}
+.isParallax:not(.dark) .modeSwitch .slider {
+  outline: 1px solid #fff;
 }
 
 // pc

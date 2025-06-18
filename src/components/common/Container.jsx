@@ -5,7 +5,7 @@ import Header from "./Header";
 import useIsMobile from "@utils/useIsMobile";
 import useDarkMode from "@utils/useDarkMode";
 
-const Container = ({ children, isHome }) => {
+const Container = ({ children, isHome, isParallax }) => {
   const isMobile = useIsMobile();
   const isDark = useDarkMode();
 
@@ -18,7 +18,7 @@ const Container = ({ children, isHome }) => {
         isHome && styles.homeContainer
       )}
     >
-      <Header mobile={isMobile} />
+      <Header mobile={isMobile} isParallax={isParallax} />
       <div className={styles.contents}>{children}</div>
       <Footer mobile={isMobile} />
     </div>
