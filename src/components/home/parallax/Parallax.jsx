@@ -109,16 +109,16 @@ const Parallax = () => {
     return () => observer.disconnect();
   }, [typedTexts]);
 
+  // smallImg 스크롤 이질감
   useEffect(() => {
     const handleScroll = () => {
       Object.entries(smallImgRefs.current).forEach(([key, el]) => {
         if (!el) return;
 
-        const speed = Number(el.dataset.speed) || 0.35;
+        const speed = Number(el.dataset.speed) || 0.2;
         const offsetTop =
           el.closest("section")?.getBoundingClientRect().top || 0;
 
-        // 기준 위치에서 얼마나 이동했는지를 반영
         const movement = offsetTop * speed;
 
         el.style.transform = `translateY(${movement}px)`;
@@ -127,7 +127,7 @@ const Parallax = () => {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
-    handleScroll(); // 초기 적용
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
