@@ -11,9 +11,6 @@
 }
 section {
   position: relative;
-  p {
-    color: var(--bg-color);
-  }
   & + section {
     margin-top: 55vw;
   }
@@ -35,12 +32,15 @@ section {
 }
 .smallImg {
   position: absolute;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 .section01,
 .section02 {
   .bigWrap {
-    margin-top: 13.5%;
+    padding-top: 150%;
+    border-top: 5px solid red;
   }
   .bigImg {
     width: 85%;
@@ -62,5 +62,21 @@ section {
     width: 30%;
     right: 10%;
     top: 33%;
+  }
+  .dialogText {
+    writing-mode: vertical-rl;
+    @include font-style($font-japen, 32px, 500, #fff);
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+    position: absolute;
+    top: -6%;
+    left: 1%;
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

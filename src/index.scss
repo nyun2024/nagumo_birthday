@@ -2,8 +2,8 @@
 @font-face {
   font-family: "GenRyuMin";
   src:
-    url("/fonts/GenRyuMin/GenRyuMin2-M.woff2") format("woff2"),
-    url("/fonts/GenRyuMin/GenRyuMin2-M.woff") format("woff");
+    url("/fonts/GenRyuMin/GenRyuMin2JP-M.woff2") format("woff2"),
+    url("/fonts/GenRyuMin/GenRyuMin2JP-M.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
@@ -183,6 +183,13 @@ html.dark {
   --font-color: #fff;
   --parallax-bg: #3d0100;
 }
+html.parallax {
+  background-color: var(--parallax-bg);
+}
+html.parallax header {
+  background-color: var(--parallax-bg);
+}
+
 article,
 aside,
 details,
