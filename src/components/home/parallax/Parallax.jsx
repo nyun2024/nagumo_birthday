@@ -20,60 +20,113 @@ const sectionImg = {
 };
 
 const Parallax = () => {
-  const [bgDark, setBgDark] = useState(false);
-  const [visibleSections, setVisibleSections] = useState([]);
+  const [visibleBigImgs, setVisibleBigImgs] = useState({});
+  const [typedTexts, setTypedTexts] = useState({});
   const containerRef = useRef(null);
 
+  // 배경색 변경
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setBgDark(entry.intersectionRatio > 0.5); //50%
-      },
-      { threshold: [0, 0.5, 1] }
-    );
+    const handleScroll = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const viewportCenter = window.innerHeight / 2;
+      const isIntersecting =
+        rect.top < viewportCenter && rect.bottom > viewportCenter;
+      document.body.style.backgroundColor = isIntersecting ? "#000" : "";
+    };
 
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      document.body.style.backgroundColor = "";
+    };
   }, []);
 
+  // bigImg fadeIn
   useEffect(() => {
-    const sectionEls = document.querySelectorAll("section");
+    const handleScroll = () => {
+      const imgEls = document.querySelectorAll("[data-bigimg]");
+      const newVisible = {};
+
+      imgEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const id = el.getAttribute("data-id");
+
+        // 조건: 요소의 상단이 화면 위에서 80% 이내에 들어오면
+        if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0 && id) {
+          newVisible[id] = true;
+        }
+      });
+
+      setVisibleBigImgs((prev) => ({ ...prev, ...newVisible }));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll(); // 초기 실행
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  // text
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-text]");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute("data-id");
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => [...new Set([...prev, id])]);
+          if (entry.intersectionRatio >= 0.8 && id && !typedTexts[id]) {
+            const fullText = sectionImg[id].text;
+            let currentText = "";
+            fullText.split("").forEach((char, i) => {
+              setTimeout(() => {
+                currentText += char;
+                setTypedTexts((prev) => ({ ...prev, [id]: currentText }));
+              }, i * 100);
+            });
           }
         });
       },
-      { threshold: 1 }
+      { threshold: 0.8 }
     );
 
-    sectionEls.forEach((el) => observer.observe(el));
+    targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [typedTexts]);
 
   return (
-    <div
-      ref={containerRef}
-      className={classNames(styles.parallaxContainer, bgDark && styles.bgDark)}
-    >
+    <div ref={containerRef} className={styles.parallaxContainer}>
       {Object.entries(sectionImg).map(([key, item], index) => {
-        const isVisible = visibleSections.includes(key);
+        const typedText = typedTexts[key] || "";
+
         return (
           <section
             data-id={key}
             className={classNames(styles[`section0${index + 1}`])}
             key={key}
           >
-            <div
-              className={classNames(styles.bigWrap, isVisible && styles.fadeIn)}
-            >
+            <div className={styles.bigWrap}>
               {item.big.map((bigItem, i) => (
-                <img src={bigItem} className={styles.bigImg} key={`big-${i}`} />
+                <img
+                  data-bigimg
+                  data-id={key}
+                  src={bigItem}
+                  className={classNames(
+                    styles.bigImg,
+                    visibleBigImgs[key] && styles.fadeIn
+                  )}
+                  key={`big-${i}`}
+                />
               ))}
             </div>
+
             {item.small.map((smallItem, i) => (
               <img
                 src={smallItem}
@@ -85,7 +138,10 @@ const Parallax = () => {
                 alt="small img"
               />
             ))}
-            <p>{item.text}</p>
+
+            <p data-text data-id={key}>
+              {typedText}
+            </p>
           </section>
         );
       })}

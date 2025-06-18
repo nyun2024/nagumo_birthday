@@ -3,29 +3,35 @@
 
 .parallaxContainer {
   transition: background-color 0.5s ease;
+  max-width: 800px;
+  margin: 0 auto;
 }
 .bgDark {
   background-color: var(--parallax-bg);
 }
 section {
   position: relative;
+  p {
+    color: var(--bg-color);
+  }
+  & + section {
+    margin-top: 55vw;
+  }
 }
 
 .bigWrap {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.5s ease;
   position: relative;
   z-index: 10;
 }
 .fadeIn {
-  opacity: 1;
+  opacity: 1 !important;
 }
 .bigImg {
-  // display: none;
-  // opacity: 0;
+  transition: opacity 0.5s ease;
+  opacity: 0;
 }
 .smallImg {
   position: absolute;
