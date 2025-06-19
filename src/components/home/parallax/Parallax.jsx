@@ -15,7 +15,7 @@ const Parallax = ({ setIsParallax }) => {
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 3;
+      const viewportCenter = window.innerHeight / 1.2;
       const isIntersecting =
         rect.top < viewportCenter && rect.bottom > viewportCenter;
       isIntersecting
