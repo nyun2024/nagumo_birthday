@@ -6,22 +6,21 @@
   max-width: 800px;
   margin: 0 auto;
 }
-.bgDark {
-  background-color: var(--parallax-bg);
-}
 section {
+  width: 100%;
   position: relative;
+  overflow: hidden;
   & + section {
     margin-top: 55vw;
   }
 }
-
 .bigWrap {
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
   z-index: 10;
+  // border-top: 2px solid red;
 }
 .fadeIn {
   opacity: 1 !important;
@@ -34,13 +33,31 @@ section {
   position: absolute;
   transition: transform 0.1s ease-out;
   will-change: transform;
+  opacity: 0.5;
+}
+.dialogSmText,
+.dialogLgText {
+  @include font-style($font-japen, inherit, 500, #fff);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  white-space: pre-line;
+  position: absolute;
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.dialogSmText {
+  color: #8e8e8e;
 }
 
-.section01,
-.section02 {
+// --------- Section01
+.section01 {
   .bigWrap {
-    padding-top: 150%;
-    border-top: 5px solid red;
+    padding-top: 320%;
   }
   .bigImg {
     width: 85%;
@@ -48,35 +65,58 @@ section {
     z-index: 1;
     transform: translateX(27%);
   }
+  // small
   .small01 {
-    width: 70%;
-    right: 6%;
-    top: -10%;
+    width: 41.5%;
+    left: 7%;
+    top: 0;
   }
   .small02 {
-    width: 37%;
-    left: 3%;
-    top: 55%;
+    width: 49%;
+    right: 9%;
+    top: 18.5%;
+  }
+  .dialogSmText {
+    font-size: 18px;
+    line-height: 20px;
+    top: 27.8%;
+    transform: translateX(-50%);
+    left: 50%;
+    text-align: center;
   }
   .small03 {
-    width: 30%;
-    right: 10%;
-    top: 33%;
+    width: 66.2%;
+    left: 0;
+    top: 34.5%;
   }
-  .dialogText {
+  .small04 {
+    width: 39.4%;
+    right: 0;
+    top: 47.5%;
+  }
+  .small05 {
+    width: 47%;
+    left: 0;
+    top: 55.8%;
+  }
+  .small06 {
+    width: 70%;
+    right: 2%;
+    top: 74%;
+  }
+  .small07 {
+    width: 40%;
+    left: 0;
+    top: 95%;
+  }
+  .dialogLgText {
+    font-size: 32px;
     writing-mode: vertical-rl;
-    @include font-style($font-japen, 32px, 500, #fff);
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s ease;
-    position: absolute;
-    top: -6%;
-    left: 1%;
-    &.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }
+
+// --------- Section02
+.section02 {
+}
+
+// --------- Section03

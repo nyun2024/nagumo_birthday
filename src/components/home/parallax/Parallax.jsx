@@ -1,32 +1,13 @@
 import styles from "./Parallax.module.scss";
-import sec01_big from "@img/home/parallax/parallax_section01_big.png";
-import sec01_1 from "@img/home/parallax/parallax_section01_1.png";
-import sec01_2 from "@img/home/parallax/parallax_section01_2.png";
-import sec01_3 from "@img/home/parallax/parallax_section01_3.png";
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
-import useDarkMode from "@utils/useDarkMode";
-
-const sectionImg = {
-  sec01: {
-    big: [sec01_big],
-    small: [sec01_1, sec01_2, sec01_3],
-    text: "どれで逝きたい\u003f",
-  },
-  sec02: {
-    big: [sec01_big],
-    small: [sec01_1, sec01_2, sec01_3],
-    text: "どれで逝きたい\u003f",
-  },
-};
+import { ParallaxImages } from "./ParallaxImages";
 
 const Parallax = ({ setIsParallax }) => {
   const [visibleBigImgs, setVisibleBigImgs] = useState({});
   const [typedTexts, setTypedTexts] = useState({});
   const containerRef = useRef(null);
   const smallImgRefs = useRef({});
-  const isDark = useDarkMode();
-  console.log(isDark);
 
   // 배경색 변경
   useEffect(() => {
@@ -34,7 +15,7 @@ const Parallax = ({ setIsParallax }) => {
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 1.5;
+      const viewportCenter = window.innerHeight / 3;
       const isIntersecting =
         rect.top < viewportCenter && rect.bottom > viewportCenter;
       isIntersecting
@@ -74,7 +55,7 @@ const Parallax = ({ setIsParallax }) => {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
-    handleScroll(); // 초기 실행
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -84,23 +65,26 @@ const Parallax = ({ setIsParallax }) => {
 
   // text
   useEffect(() => {
-    const targets = document.querySelectorAll("[data-text]");
+    const targets = document.querySelectorAll("[data-text-type]");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute("data-id");
-          if (entry.intersectionRatio >= 0.8 && id && !typedTexts[id]) {
-            const fullText = sectionImg[id].text;
+          const type = entry.target.getAttribute("data-text-type");
+          if (!id || !type) return;
+
+          const key = `${id}-${type}`;
+          const text = ParallaxImages[id][`${type}Text`];
+
+          if (entry.intersectionRatio >= 0.8 && !typedTexts[key]) {
+            entry.target.classList.add(styles.visible);
             let currentText = "";
 
-            // fade-in 효과를 주기 위해 class 추가
-            entry.target.classList.add(styles.visible);
-
-            fullText.split("").forEach((char, i) => {
+            text.split("").forEach((char, i) => {
               setTimeout(() => {
                 currentText += char;
-                setTypedTexts((prev) => ({ ...prev, [id]: currentText }));
-              }, i * 120);
+                setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
+              }, i * 110);
             });
           }
         });
@@ -118,7 +102,7 @@ const Parallax = ({ setIsParallax }) => {
       Object.entries(smallImgRefs.current).forEach(([, el]) => {
         if (!el) return;
 
-        const speed = Number(el.dataset.speed) || 0.2;
+        const speed = Number(el.dataset.speed) || 0.03;
         const offsetTop =
           el.closest("section")?.getBoundingClientRect().top || 0;
 
@@ -140,9 +124,7 @@ const Parallax = ({ setIsParallax }) => {
 
   return (
     <div ref={containerRef} className={styles.parallaxContainer}>
-      {Object.entries(sectionImg).map(([key, item], index) => {
-        const typedText = typedTexts[key] || "";
-
+      {Object.entries(ParallaxImages).map(([key, item], index) => {
         return (
           <section
             data-id={key}
@@ -176,12 +158,23 @@ const Parallax = ({ setIsParallax }) => {
                 ref={(el) => {
                   if (el) smallImgRefs.current[`${key}-${i}`] = el;
                 }}
-                data-speed={(i + 1) * 0.1} // 각각 다른 속도
+                data-speed={(i + 1) * 0.02} // 각각 다른 속도
               />
             ))}
+            <p
+              data-text-type="lg"
+              data-id={key}
+              className={styles.dialogLgText}
+            >
+              {typedTexts[`${key}-lg`] || ""}
+            </p>
 
-            <p data-text data-id={key} className={styles.dialogText}>
-              {typedText}
+            <p
+              data-text-type="sm"
+              data-id={key}
+              className={styles.dialogSmText}
+            >
+              {typedTexts[`${key}-sm`] || ""}
             </p>
           </section>
         );
