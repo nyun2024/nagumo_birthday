@@ -33,8 +33,13 @@ section {
   position: absolute;
   transition: transform 0.1s ease-out;
   will-change: transform;
-  opacity: 0.4;
-  filter: blur(0.7px);
+  filter: blur(0.6px);
+  background-color: #000;
+  display: flex;
+  img {
+    width: 100%;
+    opacity: 0.38;
+  }
 }
 .dialogSmText,
 .dialogLgText {
@@ -43,9 +48,9 @@ section {
   filter: blur(4px);
   transform: translateY(20px);
   transition:
-    opacity 0.7s ease,
-    filter 0.7s ease,
-    transform 0.7s ease;
+    opacity 1s ease,
+    filter 1s ease,
+    transform 1s ease;
   white-space: pre-line;
   position: absolute;
   &.visible {

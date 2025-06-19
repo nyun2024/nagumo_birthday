@@ -86,7 +86,7 @@ const Parallax = ({ setIsParallax }) => {
                 setTimeout(() => {
                   currentText += char;
                   setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
-                }, i * 130);
+                }, i * 150);
               });
             } else {
               // smText는 전체 한 번에 표시 (페이드인 전용)
@@ -153,19 +153,19 @@ const Parallax = ({ setIsParallax }) => {
             </div>
 
             {item.small.map((smallItem, i) => (
-              <img
-                src={smallItem}
+              <div
                 className={classNames(
                   styles.smallImg,
                   styles[`small0${i + 1}`]
                 )}
                 key={`small-${i}`}
-                alt="small img"
                 ref={(el) => {
                   if (el) smallImgRefs.current[`${key}-${i}`] = el;
                 }}
                 data-speed={(i + 1) * 0.02} // 각각 다른 속도
-              />
+              >
+                <img src={smallItem} alt="small img" />
+              </div>
             ))}
             <p
               data-text-type="lg"
