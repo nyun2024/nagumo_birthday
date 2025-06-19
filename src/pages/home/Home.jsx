@@ -12,6 +12,7 @@ const Home = () => {
     <Container isHome={true} isParallax={isParallax}>
       <HomeMain mobile={isMobile} />
       <Parallax setIsParallax={setIsParallax} />
+      <div style={{width: '100%', height: '100vh'}}></div>
     </Container>
   );
 };

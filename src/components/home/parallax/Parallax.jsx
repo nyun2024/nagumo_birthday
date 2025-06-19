@@ -4,10 +4,35 @@ import { useEffect, useRef, useState } from "react";
 import { ParallaxImages } from "./ParallaxImages";
 
 const Parallax = ({ setIsParallax }) => {
-  const [visibleBigImgs, setVisibleBigImgs] = useState({});
   const [typedTexts, setTypedTexts] = useState({});
   const containerRef = useRef(null);
   const smallImgRefs = useRef({});
+  const [activeSection, setActiveSection] = useState("sec01");
+
+  // section도달시 bigImg fadein
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const handleScroll = () => {
+      sections.forEach((section) => {
+        const secRect = section.getBoundingClientRect();
+        const id = section.getAttribute("data-id");
+        if (secRect.top <= 1 && secRect.bottom > 1) {
+          setActiveSection(id);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+
 
   // 배경색 변경
   useEffect(() => {
@@ -34,35 +59,6 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, []);
 
-  // bigImg fadeIn
-  useEffect(() => {
-    const handleScroll = () => {
-      const imgEls = document.querySelectorAll("[data-bigimg]");
-      const newVisible = {};
-
-      imgEls.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const id = el.getAttribute("data-id");
-
-        // 조건: 요소의 상단이 화면 위에서 50% 이내에 들어오면
-        if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= 0 && id) {
-          newVisible[id] = true;
-        }
-      });
-
-      setVisibleBigImgs((prev) => ({ ...prev, ...newVisible }));
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-
   useEffect(() => {
     const targets = document.querySelectorAll("[data-text-type]");
     const observer = new IntersectionObserver(
@@ -76,11 +72,9 @@ const Parallax = ({ setIsParallax }) => {
           const text = ParallaxImages[id]?.[`${type}Text`] || "";
 
           if (entry.intersectionRatio >= 0.8 && !typedTexts[key]) {
-            // 공통: .visible 클래스 추가
             entry.target.classList.add(styles.visible);
 
             if (type === "lg") {
-              // lgText는 타이핑
               let currentText = "";
               text.split("").forEach((char, i) => {
                 setTimeout(() => {
@@ -89,7 +83,6 @@ const Parallax = ({ setIsParallax }) => {
                 }, i * 150);
               });
             } else {
-              // smText는 전체 한 번에 표시 (페이드인 전용)
               setTypedTexts((prev) => ({ ...prev, [key]: text }));
             }
           }
@@ -130,6 +123,23 @@ const Parallax = ({ setIsParallax }) => {
 
   return (
     <div ref={containerRef} className={styles.parallaxContainer}>
+      <div className={styles.stickyAbsolContainer}>
+        <div className={styles.stickyWrap}>
+          {Object.entries(ParallaxImages).map(([key, item]) =>
+            item.big.map((img, i) => (
+              <img
+                key={`sticky-big-${key}-${i}`}
+                src={img}
+                className={classNames(
+                  styles.bigImg,
+                  activeSection === key && styles.visible
+                )}
+                />
+            ))
+          )}
+        </div>
+      </div>
+      <div className={styles.sectionWrap}>
       {Object.entries(ParallaxImages).map(([key, item], index) => {
         return (
           <section
@@ -137,21 +147,6 @@ const Parallax = ({ setIsParallax }) => {
             className={classNames(styles[`section0${index + 1}`])}
             key={key}
           >
-            <div className={styles.bigWrap}>
-              {item.big.map((bigItem, i) => (
-                <img
-                  data-bigimg
-                  data-id={key}
-                  src={bigItem}
-                  className={classNames(
-                    styles.bigImg,
-                    visibleBigImgs[key] && styles.fadeIn
-                  )}
-                  key={`big-${i}`}
-                />
-              ))}
-            </div>
-
             {item.small.map((smallItem, i) => (
               <div
                 className={classNames(
@@ -185,6 +180,7 @@ const Parallax = ({ setIsParallax }) => {
           </section>
         );
       })}
+      </div>
     </div>
   );
 };

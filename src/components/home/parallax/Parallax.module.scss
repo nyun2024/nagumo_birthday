@@ -5,35 +5,49 @@
   transition: background-color 0.5s ease;
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
 }
 section {
   width: 100%;
   position: relative;
   overflow: hidden;
-  & + section {
-    margin-top: 55vw;
-  }
+  height: 200vh;
 }
-.bigWrap {
+.stickyAbsolContainer {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  position: relative;
-  z-index: 10;
-  // border-top: 2px solid red;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.fadeIn {
-  opacity: 1 !important;
+.stickyWrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+}
+.bigImgWrap {
+  width: 100%;
+  height: 100vh;
+  position: relative;
 }
 .bigImg {
-  transition: opacity 1s ease;
+  width: 100%;
+  position: absolute;
   opacity: 0;
+  transition: opacity 0.5s ease;
+  bottom: 0;
+  right: 0;
+}
+
+.bigImg.visible {
+  opacity: 1;
 }
 .smallImg {
   position: absolute;
   transition: transform 0.1s ease-out;
   will-change: transform;
-  filter: blur(0.6px);
   background-color: #000;
   display: flex;
   img {
@@ -75,14 +89,14 @@ section {
 
 // --------- Section01
 .section01 {
+  height: 200vh;
+  background-color: red;
   .bigWrap {
-    padding-top: 320%;
+    // padding-top: 320%;
   }
   .bigImg {
-    width: 97%;
-    position: relative;
-    z-index: 1;
-    transform: translateX(14%);
+    width: 100%;
+    right: -10%;
   }
   // small
   .small01 {
@@ -138,6 +152,14 @@ section {
 
 // --------- Section02
 .section02 {
+  background-color: blue;
+}
+.section03 {
+  background-color: yellow;
+}
+.sectionWrap {
+  position: relative;
+  z-index: 1;
 }
 
 // --------- Section03
