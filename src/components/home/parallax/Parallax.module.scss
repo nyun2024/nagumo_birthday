@@ -26,7 +26,7 @@ section {
   opacity: 1 !important;
 }
 .bigImg {
-  transition: opacity 0.8s ease;
+  transition: opacity 1s ease;
   opacity: 0;
 }
 .smallImg {
@@ -34,24 +34,38 @@ section {
   transition: transform 0.1s ease-out;
   will-change: transform;
   opacity: 0.4;
+  filter: blur(0.7px);
 }
 .dialogSmText,
 .dialogLgText {
   @include font-style($font-japen, inherit, 500, #fff);
   opacity: 0;
+  filter: blur(4px);
   transform: translateY(20px);
   transition:
     opacity 0.7s ease,
+    filter 0.7s ease,
     transform 0.7s ease;
   white-space: pre-line;
   position: absolute;
   &.visible {
     opacity: 1;
+    filter: blur(0);
     transform: translateY(0);
   }
 }
 .dialogSmText {
   color: #b6b6b6;
+  opacity: 0;
+  filter: blur(4px);
+  transition:
+    opacity 0.8s ease,
+    filter 0.8s ease;
+
+  &.visible {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 // --------- Section01

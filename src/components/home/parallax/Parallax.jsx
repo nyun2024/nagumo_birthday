@@ -15,7 +15,7 @@ const Parallax = ({ setIsParallax }) => {
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 1.2;
+      const viewportCenter = window.innerHeight / 1.3;
       const isIntersecting =
         rect.top < viewportCenter && rect.bottom > viewportCenter;
       isIntersecting
@@ -63,7 +63,6 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, []);
 
-  // text
   useEffect(() => {
     const targets = document.querySelectorAll("[data-text-type]");
     const observer = new IntersectionObserver(
@@ -74,18 +73,25 @@ const Parallax = ({ setIsParallax }) => {
           if (!id || !type) return;
 
           const key = `${id}-${type}`;
-          const text = ParallaxImages[id][`${type}Text`];
+          const text = ParallaxImages[id]?.[`${type}Text`] || "";
 
           if (entry.intersectionRatio >= 0.8 && !typedTexts[key]) {
+            // 공통: .visible 클래스 추가
             entry.target.classList.add(styles.visible);
-            let currentText = "";
 
-            text.split("").forEach((char, i) => {
-              setTimeout(() => {
-                currentText += char;
-                setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
-              }, i * 110);
-            });
+            if (type === "lg") {
+              // lgText는 타이핑
+              let currentText = "";
+              text.split("").forEach((char, i) => {
+                setTimeout(() => {
+                  currentText += char;
+                  setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
+                }, i * 130);
+              });
+            } else {
+              // smText는 전체 한 번에 표시 (페이드인 전용)
+              setTypedTexts((prev) => ({ ...prev, [key]: text }));
+            }
           }
         });
       },
