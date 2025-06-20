@@ -22,32 +22,20 @@ const Parallax = ({ setIsParallax }) => {
       prevScrollY.current = currentScrollY;
 
       sections.forEach((section) => {
-        const secRect = section.getBoundingClientRect();
         const id = section.getAttribute("data-id");
         if (!id) return;
 
+        // sec01은 smallImg02 기준
         if (id === "sec01") {
-          const triggerPoint = Math.min(
-            window.innerHeight * 0.2,
-            section.offsetHeight * 0.2
-          );
+          const el = smallImgRefs.current["sec01-1"]; // smallImg02 (0부터 시작)
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
 
-          if (
-            scrollingDown &&
-            secRect.top <= triggerPoint * -1 &&
-            secRect.bottom > 1
-          ) {
-            setActiveBigImgSection(id);
-          }
-
-          if (
-            !scrollingDown &&
-            secRect.bottom >= window.innerHeight - 1 &&
-            secRect.top < window.innerHeight
-          ) {
+          if (rect.top <= 50 && rect.bottom > 0) {
             setActiveBigImgSection(id);
           }
         } else {
+          const secRect = section.getBoundingClientRect();
           if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
             setActiveBigImgSection(id);
           }
@@ -97,7 +85,7 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, []);
 
-  // lgText 타이핑 애니메이션 + smText 표시 상태 관리
+  // lgText 타이핑 + smText section 위치 체크
   useEffect(() => {
     const targets = document.querySelectorAll("[data-text-type='lg']");
     const observer = new IntersectionObserver(
@@ -127,6 +115,7 @@ const Parallax = ({ setIsParallax }) => {
     );
     targets.forEach((el) => observer.observe(el));
 
+    // smText 나타날 section 추적
     const sections = document.querySelectorAll("section");
     const handleScroll = () => {
       const visibleSections = [];
@@ -153,7 +142,7 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, [typedTexts]);
 
-  // smallImg 스크롤 이질감
+  // smallImg 패럴럭스 효과
   useEffect(() => {
     const handleScroll = () => {
       Object.entries(smallImgRefs.current).forEach(([, el]) => {
@@ -195,46 +184,38 @@ const Parallax = ({ setIsParallax }) => {
           )}
         </div>
       </div>
-      {Object.entries(ParallaxImages).map(([key, item], index) => {
-        return (
-          <section
-            data-id={key}
-            className={classNames(styles[`section0${index + 1}`])}
-            key={key}
+
+      {Object.entries(ParallaxImages).map(([key, item], index) => (
+        <section
+          data-id={key}
+          className={classNames(styles[`section0${index + 1}`])}
+          key={key}
+        >
+          {item.small.map((smallItem, i) => (
+            <div
+              className={classNames(styles.smallImg, styles[`small0${i + 1}`])}
+              key={`small-${i}`}
+              ref={(el) => {
+                if (el) smallImgRefs.current[`${key}-${i}`] = el;
+              }}
+              data-speed={(i + 1) * 0.1}
+            >
+              <img src={smallItem} alt="small img" />
+            </div>
+          ))}
+          <p data-text-type="lg" data-id={key} className={styles.dialogLgText}>
+            {typedTexts[`${key}-lg`] || ""}
+          </p>
+          <p
+            className={classNames(
+              styles.dialogSmText,
+              visibleSmTextSections.includes(key) && styles.visible
+            )}
           >
-            {item.small.map((smallItem, i) => (
-              <div
-                className={classNames(
-                  styles.smallImg,
-                  styles[`small0${i + 1}`]
-                )}
-                key={`small-${i}`}
-                ref={(el) => {
-                  if (el) smallImgRefs.current[`${key}-${i}`] = el;
-                }}
-                data-speed={(i + 1) * 0.1}
-              >
-                <img src={smallItem} alt="small img" />
-              </div>
-            ))}
-            <p
-              data-text-type="lg"
-              data-id={key}
-              className={styles.dialogLgText}
-            >
-              {typedTexts[`${key}-lg`] || ""}
-            </p>
-            <p
-              className={classNames(
-                styles.dialogSmText,
-                visibleSmTextSections.includes(key) && styles.visible
-              )}
-            >
-              {ParallaxImages[key].smText}
-            </p>
-          </section>
-        );
-      })}
+            {ParallaxImages[key].smText}
+          </p>
+        </section>
+      ))}
     </div>
   );
 };
