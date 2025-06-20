@@ -7,6 +7,10 @@ import sec01_4 from "@img/home/parallax/sec01/parallax_section01_4.png";
 import sec01_5 from "@img/home/parallax/sec01/parallax_section01_5.png";
 import sec01_6 from "@img/home/parallax/sec01/parallax_section01_6.png";
 import sec01_7 from "@img/home/parallax/sec01/parallax_section01_7.png";
+import sec01_8 from "@img/home/parallax/sec01/parallax_section01_8.png";
+import sec01_9 from "@img/home/parallax/sec01/parallax_section01_9.png";
+import sec01_10 from "@img/home/parallax/sec01/parallax_section01_10.png";
+import sec01_11 from "@img/home/parallax/sec01/parallax_section01_11.png";
 
 import sec02_big from "@img/home/parallax/sec02/parallax_section02_big.png";
 import sec02_big_wide from "@img/home/parallax/sec02/parallax_section02_big_wide.png";
@@ -29,7 +33,7 @@ import sec03_7 from "@img/home/parallax/sec03/parallax_section03_7.png";
 export const ParallaxImages = {
   sec01: {
     big: [sec01_big],
-    small: [sec01_1, sec01_2, sec01_3, sec01_4, sec01_5, sec01_6, sec01_7],
+    small: [sec01_1, sec01_2, sec01_3, sec01_4, sec01_5, sec01_6, sec01_7, sec01_8, sec01_9, sec01_10, sec01_11],
     lgText: "どれで逝きたい\u003f",
     smText: "特別に死に方選ばせてあげるよ",
   },

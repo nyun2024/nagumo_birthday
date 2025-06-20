@@ -50,7 +50,7 @@
   }
   .sec01BigImgWrap {
     padding-left: 12%;
-    padding-top: 10%;
+    padding-top: 7%;
     .bigImg {
       object-position: bottom right;
     }
@@ -116,7 +116,8 @@ section {
 
 // --------- Section01
 .section01 {
-  height: 480vw;
+  height: 440vw;
+  // margin-bottom: -50vw;
   .dialogSmText {
     font-size: 22px;
     line-height: 28px;
@@ -134,8 +135,8 @@ section {
   }
   // small
   .small01 {
-    width: 30%;
-    left: 4%;
+    width: 31%;
+    left: 8%;
     top: 10%;
   }
   .small02 {
@@ -145,28 +146,49 @@ section {
   }
   .small03 {
     width: 57%;
-    left: 8%;
+    left: 6%;
     top: 37%;
   }
   .small04 {
-    width: 27%;
-    left: 47%;
+    width: 29.5%;
+    right: 0;
     top: 52%;
   }
   .small05 {
-    width: 34%;
-    left: 0;
-    top: 65%;
+    width: 39%;
+    left: 15%;
+    top: 59%;
   }
   .small06 {
-    width: 60%;
+    width: 73%;
     right: 0;
-    top: 82%;
+    top: 73%;
   }
   .small07 {
-    width: 35%;
-    left: 8%;
-    top: 102%;
+    width: 40%;
+    left: 0;
+    top: 91%;
+  }
+  .small08 {
+    width: 22%;
+    right: 10%;
+    top: 18%;
+  }
+  .small09 {
+    width: 26%;
+    left: 0;
+    top: 65%;
+    display: none;
+  }
+  .small10 {
+    width: 42%;
+    left: 45%;
+    top: 86%
+  }
+  .small11 {
+    width: 30%;
+    right: 3%;
+    top: 100%
   }
 }
 

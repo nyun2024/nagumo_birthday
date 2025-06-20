@@ -177,8 +177,9 @@ const Parallax = ({ setIsParallax }) => {
         const offsetTop =
           el.closest("section")?.getBoundingClientRect().top || 0;
         const movement = offsetTop * speed;
-
-        el.style.transform = `translateY(${movement}px)`;
+        const maxMove = 220; // 최대 이동 px
+        const clamped = Math.max(Math.min(movement, maxMove), -maxMove);
+        el.style.transform = `translateY(${clamped}px)`;
       });
     };
 
@@ -223,7 +224,7 @@ const Parallax = ({ setIsParallax }) => {
         >
           {item.small.map((smallItem, i) => (
             <div
-              className={classNames(styles.smallImg, styles[`small0${i + 1}`])}
+              className={classNames(styles.smallImg, styles[`small${i < 9 ? '0' : ''}${i + 1}`])}
               key={`small-${i}`}
               ref={(el) => {
                 if (el) smallImgRefs.current[`${key}-${i}`] = el;
