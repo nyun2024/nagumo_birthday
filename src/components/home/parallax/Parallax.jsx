@@ -12,7 +12,7 @@ const Parallax = ({ setIsParallax }) => {
 
   const prevScrollY = useRef(0);
 
-  // section도달시 bigImg fadein
+  // section 도달 시 bigImg fadeIn
   useEffect(() => {
     const sections = document.querySelectorAll("section");
 
@@ -21,33 +21,51 @@ const Parallax = ({ setIsParallax }) => {
       const scrollingDown = currentScrollY > prevScrollY.current;
       prevScrollY.current = currentScrollY;
 
-      sections.forEach((section) => {
+      let newActiveSection = null;
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
         const id = section.getAttribute("data-id");
-        if (!id) return;
+        if (!id) continue;
 
-        // sec01은 smallImg02 기준
         if (id === "sec01") {
-          const el = smallImgRefs.current["sec01-1"]; // smallImg02 (0부터 시작)
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
+          const el = smallImgRefs.current["sec01-1"]; //section01 smallImg02
+          if (el) {
+            const triggerRect = el.getBoundingClientRect();
+            if (triggerRect.top <= 50 && triggerRect.bottom > 0) {
+              newActiveSection = "sec01";
+              break;
+            }
+          }
+          continue;
+        }
 
-          if (rect.top <= 50 && rect.bottom > 0) {
-            setActiveBigImgSection(id);
-          }
-        } else {
-          const secRect = section.getBoundingClientRect();
-          if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
-            setActiveBigImgSection(id);
-          }
+        const secRect = section.getBoundingClientRect();
+
+        if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
+          newActiveSection = id;
+          break;
+        }
+
+        const prevSection = sections[i - 1];
+        if (!scrollingDown && prevSection) {
+          const prevId = prevSection.getAttribute("data-id");
+          const prevRect = prevSection.getBoundingClientRect();
           if (
-            !scrollingDown &&
-            secRect.bottom >= window.innerHeight - 1 &&
-            secRect.top < window.innerHeight
+            prevRect.bottom >= window.innerHeight - 1 &&
+            prevRect.top < window.innerHeight
           ) {
-            setActiveBigImgSection(id);
+            newActiveSection = prevId;
+            break;
           }
         }
-      });
+      }
+
+      if (newActiveSection) {
+        setActiveBigImgSection((prev) =>
+          prev !== newActiveSection ? newActiveSection : prev
+        );
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
