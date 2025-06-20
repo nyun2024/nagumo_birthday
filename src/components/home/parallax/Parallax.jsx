@@ -27,14 +27,19 @@ const Parallax = ({ setIsParallax }) => {
         if (!id) return;
 
         if (id === "sec01") {
-          const triggerOffset = section.offsetHeight * 0.2;
+          const triggerPoint = Math.min(
+            window.innerHeight * 0.2,
+            section.offsetHeight * 0.2
+          );
+
           if (
             scrollingDown &&
-            secRect.top <= -triggerOffset + 1 &&
+            secRect.top <= triggerPoint * -1 &&
             secRect.bottom > 1
           ) {
             setActiveBigImgSection(id);
           }
+
           if (
             !scrollingDown &&
             secRect.bottom >= window.innerHeight - 1 &&
