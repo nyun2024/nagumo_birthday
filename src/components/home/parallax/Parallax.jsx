@@ -111,50 +111,54 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, [setIsParallax]);
 
-  // lgText 타이핑 + smText section 위치 체크
+  // lgText smText
   useEffect(() => {
-    const targets = document.querySelectorAll("[data-text-type='lg']");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute("data-id");
-          const type = entry.target.getAttribute("data-text-type");
-          if (!id || type !== "lg") return;
+    const handleTextTyping = () => {
+      const targets = document.querySelectorAll("[data-text-type='lg']");
 
-          const key = `${id}-lg`;
-          const text = ParallaxImages[id]?.lgText || "";
+      targets.forEach((el) => {
+        const id = el.getAttribute("data-id");
+        if (!id) return;
 
-          if (entry.intersectionRatio >= 0.8 && !typedTexts[key]) {
-            entry.target.classList.add(styles.visible);
+        const key = `${id}-lg`;
+        const text = ParallaxImages[id]?.lgText || "";
 
-            let currentText = "";
-            text.split("").forEach((char, i) => {
-              setTimeout(() => {
-                currentText += char;
-                setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
-              }, i * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.8 }
-    );
-    targets.forEach((el) => observer.observe(el));
+        if (typedTexts[key]) return;
 
-    // smText 나타날 section 추적
-    const sections = document.querySelectorAll("section");
-    const handleScroll = () => {
+        const rect = el.getBoundingClientRect();
+        const triggerY = window.innerHeight * 0.4;
+
+        if (rect.top >= triggerY - 10 && rect.top <= triggerY + 10) {
+          el.classList.add(styles.visible);
+          let currentText = "";
+          text.split("").forEach((char, i) => {
+            setTimeout(() => {
+              currentText += char;
+              setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
+            }, i * 150);
+          });
+        }
+      });
+    };
+
+    const handleSmTextVisibility = () => {
       const visibleSections = [];
+      const sections = document.querySelectorAll("section");
 
       sections.forEach((section) => {
         const id = section.getAttribute("data-id");
         const rect = section.getBoundingClientRect();
-
         if (rect.top <= 1 && rect.bottom > 1) {
           visibleSections.push(id);
         }
       });
+
       setVisibleSmTextSections(visibleSections);
+    };
+
+    const handleScroll = () => {
+      handleTextTyping();
+      handleSmTextVisibility();
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -162,11 +166,11 @@ const Parallax = ({ setIsParallax }) => {
     handleScroll();
 
     return () => {
-      observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
   }, [typedTexts]);
+
 
   // smallImg 패럴럭스 효과
   useEffect(() => {
