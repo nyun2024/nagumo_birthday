@@ -7,42 +7,41 @@
   margin: 0 auto;
   position: relative;
 }
-section {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  height: 200vh;
-}
+// ---------- sticky
 .stickyAbsolContainer {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-}
-.stickyWrap {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  z-index: 10;
-  pointer-events: none;
-}
-.bigImgWrap {
-  width: 100%;
-  height: 100dvh;
-  position: relative;
-}
-.bigImg {
-  width: 100%;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  bottom: 0;
-  right: 0;
+  .stickyWrap {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .bigImg {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    bottom: 0;
+    right: 0;
+    &.visible {
+      opacity: 1;
+    }
+  }
+  .sec01BigImg {
+    width: 85%;
+  }
 }
 
-.bigImg.visible {
-  opacity: 1;
+section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 200vh;
 }
 .smallImg {
   position: absolute;
@@ -74,31 +73,27 @@ section {
   }
 }
 .dialogSmText {
-  color: #b6b6b6;
+  color: #fff;
+  font-size: 32px !important;
+  padding-top: 100px;
   opacity: 0;
   filter: blur(4px);
   transition:
     opacity 0.8s ease,
     filter 0.8s ease;
-
   &.visible {
     opacity: 1;
     filter: blur(0);
   }
 }
+.dialogLgText {
+  display: none !important;
+}
 
 // --------- Section01
 .section01 {
-  height: 200vh;
+  height: 480vw;
   background-color: red;
-  .bigWrap {
-    // padding-top: 320%;
-  }
-  .bigImg {
-    width: 100%;
-    right: -10%;
-  }
-  // small
   .small01 {
     width: 41.5%;
     left: 7%;
@@ -108,14 +103,6 @@ section {
     width: 49%;
     right: 9%;
     top: 18.5%;
-  }
-  .dialogSmText {
-    font-size: 18px;
-    line-height: 20px;
-    top: 27.8%;
-    transform: translateX(-50%);
-    left: 50%;
-    text-align: center;
   }
   .small03 {
     width: 66.2%;
@@ -142,6 +129,14 @@ section {
     left: 0;
     top: 95%;
   }
+  .dialogSmText {
+    font-size: 18px;
+    line-height: 20px;
+    top: 27.8%;
+    transform: translateX(-50%);
+    left: 50%;
+    text-align: center;
+  }
   .dialogLgText {
     font-size: 32px;
     writing-mode: vertical-rl;
@@ -152,14 +147,10 @@ section {
 
 // --------- Section02
 .section02 {
-  background-color: blue;
+  // background-color: blue;
 }
 .section03 {
-  background-color: yellow;
-}
-.sectionWrap {
-  position: relative;
-  z-index: 1;
+  // background-color: yellow;
 }
 
 // --------- Section03

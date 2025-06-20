@@ -7,17 +7,52 @@ const Parallax = ({ setIsParallax }) => {
   const [typedTexts, setTypedTexts] = useState({});
   const containerRef = useRef(null);
   const smallImgRefs = useRef({});
-  const [activeSection, setActiveSection] = useState("sec01");
+  const [activeBigImgSection, setActiveBigImgSection] = useState(null);
+  const [visibleSmTextSections, setVisibleSmTextSections] = useState([]);
+
+  const prevScrollY = useRef(0);
 
   // section도달시 bigImg fadein
   useEffect(() => {
     const sections = document.querySelectorAll("section");
+
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > prevScrollY.current;
+      prevScrollY.current = currentScrollY;
+
       sections.forEach((section) => {
         const secRect = section.getBoundingClientRect();
         const id = section.getAttribute("data-id");
-        if (secRect.top <= 1 && secRect.bottom > 1) {
-          setActiveSection(id);
+        if (!id) return;
+
+        if (id === "sec01") {
+          const triggerOffset = section.offsetHeight * 0.2;
+          if (
+            scrollingDown &&
+            secRect.top <= -triggerOffset + 1 &&
+            secRect.bottom > 1
+          ) {
+            setActiveBigImgSection(id);
+          }
+          if (
+            !scrollingDown &&
+            secRect.bottom >= window.innerHeight - 1 &&
+            secRect.top < window.innerHeight
+          ) {
+            setActiveBigImgSection(id);
+          }
+        } else {
+          if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
+            setActiveBigImgSection(id);
+          }
+          if (
+            !scrollingDown &&
+            secRect.bottom >= window.innerHeight - 1 &&
+            secRect.top < window.innerHeight
+          ) {
+            setActiveBigImgSection(id);
+          }
         }
       });
     };
@@ -31,8 +66,6 @@ const Parallax = ({ setIsParallax }) => {
       window.removeEventListener("resize", handleScroll);
     };
   }, []);
-
-
 
   // 배경색 변경
   useEffect(() => {
@@ -59,40 +92,60 @@ const Parallax = ({ setIsParallax }) => {
     };
   }, []);
 
+  // lgText 타이핑 애니메이션 + smText 표시 상태 관리
   useEffect(() => {
-    const targets = document.querySelectorAll("[data-text-type]");
+    const targets = document.querySelectorAll("[data-text-type='lg']");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute("data-id");
           const type = entry.target.getAttribute("data-text-type");
-          if (!id || !type) return;
+          if (!id || type !== "lg") return;
 
-          const key = `${id}-${type}`;
-          const text = ParallaxImages[id]?.[`${type}Text`] || "";
+          const key = `${id}-lg`;
+          const text = ParallaxImages[id]?.lgText || "";
 
           if (entry.intersectionRatio >= 0.8 && !typedTexts[key]) {
             entry.target.classList.add(styles.visible);
 
-            if (type === "lg") {
-              let currentText = "";
-              text.split("").forEach((char, i) => {
-                setTimeout(() => {
-                  currentText += char;
-                  setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
-                }, i * 150);
-              });
-            } else {
-              setTypedTexts((prev) => ({ ...prev, [key]: text }));
-            }
+            let currentText = "";
+            text.split("").forEach((char, i) => {
+              setTimeout(() => {
+                currentText += char;
+                setTypedTexts((prev) => ({ ...prev, [key]: currentText }));
+              }, i * 150);
+            });
           }
         });
       },
       { threshold: 0.8 }
     );
-
     targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const sections = document.querySelectorAll("section");
+    const handleScroll = () => {
+      const visibleSections = [];
+
+      sections.forEach((section) => {
+        const id = section.getAttribute("data-id");
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 1 && rect.bottom > 1) {
+          visibleSections.push(id);
+        }
+      });
+      setVisibleSmTextSections(visibleSections);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [typedTexts]);
 
   // smallImg 스크롤 이질감
@@ -100,11 +153,9 @@ const Parallax = ({ setIsParallax }) => {
     const handleScroll = () => {
       Object.entries(smallImgRefs.current).forEach(([, el]) => {
         if (!el) return;
-
-        const speed = Number(el.dataset.speed) || 0.03;
+        const speed = Number(el.dataset.speed) || 0.1;
         const offsetTop =
           el.closest("section")?.getBoundingClientRect().top || 0;
-
         const movement = offsetTop * speed;
 
         el.style.transform = `translateY(${movement}px)`;
@@ -114,7 +165,6 @@ const Parallax = ({ setIsParallax }) => {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
     handleScroll();
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
@@ -132,14 +182,14 @@ const Parallax = ({ setIsParallax }) => {
                 src={img}
                 className={classNames(
                   styles.bigImg,
-                  activeSection === key && styles.visible
+                  styles[`${key}BigImg`],
+                  activeBigImgSection === key && styles.visible
                 )}
-                />
+              />
             ))
           )}
         </div>
       </div>
-      <div className={styles.sectionWrap}>
       {Object.entries(ParallaxImages).map(([key, item], index) => {
         return (
           <section
@@ -157,7 +207,7 @@ const Parallax = ({ setIsParallax }) => {
                 ref={(el) => {
                   if (el) smallImgRefs.current[`${key}-${i}`] = el;
                 }}
-                data-speed={(i + 1) * 0.02} // 각각 다른 속도
+                data-speed={(i + 1) * 0.1}
               >
                 <img src={smallItem} alt="small img" />
               </div>
@@ -169,18 +219,17 @@ const Parallax = ({ setIsParallax }) => {
             >
               {typedTexts[`${key}-lg`] || ""}
             </p>
-
             <p
-              data-text-type="sm"
-              data-id={key}
-              className={styles.dialogSmText}
+              className={classNames(
+                styles.dialogSmText,
+                visibleSmTextSections.includes(key) && styles.visible
+              )}
             >
-              {typedTexts[`${key}-sm`] || ""}
+              {ParallaxImages[key].smText}
             </p>
           </section>
         );
       })}
-      </div>
     </div>
   );
 };
