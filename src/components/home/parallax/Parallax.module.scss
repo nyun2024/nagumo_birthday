@@ -73,8 +73,12 @@ section {
   position: absolute;
   transition: transform 0.1s ease-out;
   will-change: transform;
-  background-color: #000;
-  display: flex;
+  .smallImgInner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+  } 
   img {
     width: 100%;
     opacity: 0.38;
@@ -138,49 +142,65 @@ section {
     width: 31%;
     left: 8%;
     top: 10%;
-    img {transform: rotate(-9deg);}
+    .smallImgInner {
+      transform: rotate(-9deg);
+    }
   }
   .small02 {
     width: 44%;
     right: 0;
     top: 30%;
-    img {transform: rotate(-5deg); }
+    .smallImgInner {
+      transform: rotate(-5deg); 
+    }
   }
   .small03 {
     width: 57%;
     left: 6%;
     top: 37%;
-    img {transform: rotate(3deg);}
+    .smallImgInner {
+      transform: rotate(3deg);
+    }
   }
   .small04 {
     width: 29.5%;
     right: 0;
     top: 52%;
-    img {transform: rotate(5deg);}
+    .smallImgInner {
+      transform: rotate(5deg);
+    }
   }
   .small05 {
     width: 39%;
     left: 13%;
     top: 59%;
-    img {    transform: rotate(-6deg);}
+    .smallImgInner {
+      transform: rotate(-6deg);
+    }
   }
   .small06 {
     width: 73%;
     right: 0;
     top: 73%;
-    img {transform: rotate(3deg);}
+    .smallImgInner {
+      transform: rotate(3deg);
+    }
   }
   .small07 {
     width: 40%;
     left: 0;
     top: 96%;
-    img {transform: rotate(-4deg);}
+    .smallImgInner {
+      transform: rotate(-4deg);
+    }
   }
   .small08 {
     width: 22%;
     right: 10%;
     top: 18%;
-    img {   transform: rotate(8deg);}
+    .smallImgInner {
+      transform: rotate(8deg);
+    }
   }
   .small09 {
     width: 26%;
@@ -197,7 +217,9 @@ section {
     width: 30%;
     right: 3%;
     top: 100%;
-    img {transform: rotate(11deg);}
+    .smallImgInner {
+      transform: rotate(11deg);
+    }
   }
 }
 

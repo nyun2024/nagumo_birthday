@@ -235,7 +235,9 @@ const Parallax = ({ setIsParallax }) => {
               }}
               data-speed={(i + 1) * 0.1}
             >
-              <img src={smallItem} alt="small img" />
+              <div className={styles.smallImgInner}>
+                <img src={smallItem} alt="small img" />
+              </div>
             </div>
           ))}
           <p data-text-type="lg" data-id={key} className={styles.dialogLgText}>
