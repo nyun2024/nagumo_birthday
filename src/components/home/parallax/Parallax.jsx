@@ -12,53 +12,57 @@ const Parallax = ({ setIsParallax }) => {
 
   const prevScrollY = useRef(0);
 
-  // section 도달 시 bigImg fadeIn
   useEffect(() => {
     const sections = document.querySelectorAll("section");
+    const sec01Key = "sec01-1"; // section01의 smallImg02
+
+    const getScrollYFromTop = (el) => {
+      const rect = el.getBoundingClientRect();
+      return window.scrollY + rect.top;
+    };
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > prevScrollY.current;
-      prevScrollY.current = currentScrollY;
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const scrollingDown = scrollY > prevScrollY.current;
+      prevScrollY.current = scrollY;
 
       let newActiveSection = null;
 
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
+      sections.forEach((section, i) => {
         const id = section.getAttribute("data-id");
-        if (!id) continue;
+        if (!id) return;
 
         if (id === "sec01") {
-          const el = smallImgRefs.current["sec01-1"]; //section01 smallImg02
-          if (el) {
-            const triggerRect = el.getBoundingClientRect();
-            if (triggerRect.top <= 50 && triggerRect.bottom > 0) {
-              newActiveSection = "sec01";
-              break;
+          const el = smallImgRefs.current[sec01Key];
+          if (!el) return;
+
+          const triggerY = getScrollYFromTop(el);
+          if (scrollY >= triggerY - 1) {
+            newActiveSection = id;
+          }
+        } else {
+          const rect = section.getBoundingClientRect();
+
+          if (scrollingDown && rect.top <= 1 && rect.bottom > 1) {
+            newActiveSection = id;
+          }
+
+          const prevSection = sections[i - 1];
+          if (!scrollingDown && prevSection) {
+            const prevId = prevSection.getAttribute("data-id");
+            const prevRect = prevSection.getBoundingClientRect();
+            // sec01 제외
+            if (
+              prevId !== "sec01" &&
+              prevRect.bottom >= windowHeight - 1 &&
+              prevRect.top < windowHeight
+            ) {
+              newActiveSection = prevId;
             }
           }
-          continue;
         }
-        const secRect = section.getBoundingClientRect();
-
-        if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
-          newActiveSection = id;
-          break;
-        }
-
-        const prevSection = sections[i - 1];
-        if (!scrollingDown && prevSection) {
-          const prevId = prevSection.getAttribute("data-id");
-          const prevRect = prevSection.getBoundingClientRect();
-          if (
-            prevRect.bottom >= window.innerHeight - 1 &&
-            prevRect.top < window.innerHeight
-          ) {
-            newActiveSection = prevId;
-            break;
-          }
-        }
-      }
+      });
 
       if (newActiveSection) {
         setActiveBigImgSection((prev) =>
