@@ -2,6 +2,7 @@ import styles from "./Parallax.module.scss";
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { ParallaxImages } from "./ParallaxImages";
+import { useIsWidth } from "./ParallaxImages";
 
 const Parallax = ({ setIsParallax }) => {
   const [typedTexts, setTypedTexts] = useState({});
@@ -9,8 +10,8 @@ const Parallax = ({ setIsParallax }) => {
   const smallImgRefs = useRef({});
   const [activeBigImgSection, setActiveBigImgSection] = useState(null);
   const [visibleSmTextSections, setVisibleSmTextSections] = useState([]);
-
   const prevScrollY = useRef(0);
+  const isWide = useIsWidth(500);
 
   // section 도달 시 bigImg fadeIn
   useEffect(() => {
@@ -196,15 +197,19 @@ const Parallax = ({ setIsParallax }) => {
         <div className={styles.stickyWrap}>
           {Object.entries(ParallaxImages).map(([key, item]) =>
             item.big.map((img, i) => (
-              <img
-                key={`sticky-big-${key}-${i}`}
-                src={img}
+              <div
                 className={classNames(
-                  styles.bigImg,
-                  styles[`${key}BigImg`],
+                  styles.bigImgWrap,
+                  styles[`${key}BigImgWrap`],
                   activeBigImgSection === key && styles.visible
                 )}
-              />
+              >
+                <img
+                  key={`sticky-big-${key}-${i}`}
+                  src={key === "sec02" && isWide ? item.bigWide : img}
+                  className={classNames(styles.bigImg, styles[`${key}BigImg`])}
+                />
+              </div>
             ))
           )}
         </div>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import sec01_big from "@img/home/parallax/sec01/parallax_section01_big.png";
 import sec01_1 from "@img/home/parallax/sec01/parallax_section01_1.png";
 import sec01_2 from "@img/home/parallax/sec01/parallax_section01_2.png";
@@ -8,6 +9,7 @@ import sec01_6 from "@img/home/parallax/sec01/parallax_section01_6.png";
 import sec01_7 from "@img/home/parallax/sec01/parallax_section01_7.png";
 
 import sec02_big from "@img/home/parallax/sec02/parallax_section02_big.png";
+import sec02_big_wide from "@img/home/parallax/sec02/parallax_section02_big_wide.png";
 import sec02_1 from "@img/home/parallax/sec02/parallax_section02_1.png";
 import sec02_2 from "@img/home/parallax/sec02/parallax_section02_2.png";
 import sec02_3 from "@img/home/parallax/sec02/parallax_section02_3.png";
@@ -33,6 +35,7 @@ export const ParallaxImages = {
   },
   sec02: {
     big: [sec02_big],
+    bigWide: [sec02_big_wide],
     small: [sec02_1, sec02_2, sec02_3, sec02_4, sec02_5, sec02_6],
     lgText: "大丈夫ー殺しの免許は\nゴールドだから～",
     smText: "殺しに正義も悪もないよ",
@@ -44,3 +47,18 @@ export const ParallaxImages = {
     smText: "殺しに正義も悪もないよ",
   },
 };
+
+export function useIsWidth(width) {
+  const [isWide, setIsWide] = useState(window.innerWidth >= width);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsWide(window.innerWidth >= width);
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isWide;
+}
