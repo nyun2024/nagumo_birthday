@@ -39,7 +39,6 @@ const Parallax = ({ setIsParallax }) => {
           }
           continue;
         }
-
         const secRect = section.getBoundingClientRect();
 
         if (scrollingDown && secRect.top <= 1 && secRect.bottom > 1) {
