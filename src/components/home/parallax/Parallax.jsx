@@ -12,62 +12,63 @@ const Parallax = ({ setIsParallax }) => {
 
   const prevScrollY = useRef(0);
 
+  // section 도달 시 bigImg fadeIn
   useEffect(() => {
     const sections = document.querySelectorAll("section");
-    const sec01Key = "sec01-1"; // section01의 smallImg02
-
-    const getScrollYFromTop = (el) => {
-      const rect = el.getBoundingClientRect();
-      return window.scrollY + rect.top;
-    };
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const scrollingDown = scrollY > prevScrollY.current;
-      prevScrollY.current = scrollY;
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > prevScrollY.current;
+      prevScrollY.current = currentScrollY;
 
       let newActiveSection = null;
 
-      sections.forEach((section, i) => {
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
         const id = section.getAttribute("data-id");
-        if (!id) return;
+        if (!id) continue;
 
         if (id === "sec01") {
-          const el = smallImgRefs.current[sec01Key];
-          if (!el) return;
-
-          const triggerY = getScrollYFromTop(el);
-          if (scrollY >= triggerY - 1) {
-            newActiveSection = id;
-          }
-        } else {
-          const rect = section.getBoundingClientRect();
-
-          if (scrollingDown && rect.top <= 1 && rect.bottom > 1) {
-            newActiveSection = id;
-          }
-
-          const prevSection = sections[i - 1];
-          if (!scrollingDown && prevSection) {
-            const prevId = prevSection.getAttribute("data-id");
-            const prevRect = prevSection.getBoundingClientRect();
-            // sec01 제외
-            if (
-              prevId !== "sec01" &&
-              prevRect.bottom >= windowHeight - 1 &&
-              prevRect.top < windowHeight
-            ) {
-              newActiveSection = prevId;
+          const el = smallImgRefs.current["sec01-1"]; // section01 smallImg02
+          if (el) {
+            const triggerRect = el.getBoundingClientRect();
+            if (triggerRect.top <= 50 && triggerRect.bottom > 0) {
+              newActiveSection = "sec01";
+              break;
             }
           }
+          continue;
         }
-      });
 
-      if (newActiveSection) {
-        setActiveBigImgSection((prev) =>
-          prev !== newActiveSection ? newActiveSection : prev
-        );
+        const secRect = section.getBoundingClientRect();
+
+        if (scrollingDown) {
+          if (secRect.top <= 1 && secRect.bottom > 1) {
+            newActiveSection = id;
+            break;
+          }
+        } else {
+          const prevSection = sections[i - 1];
+          if (prevSection) {
+            const prevId = prevSection.getAttribute("data-id");
+            const prevRect = prevSection.getBoundingClientRect();
+
+            if (
+              prevRect.bottom <= window.innerHeight + 20 &&
+              prevRect.bottom > window.innerHeight - 100
+            ) {
+              newActiveSection = prevId;
+              break;
+            }
+          } else if (secRect.top <= 1 && secRect.bottom > 1) {
+            newActiveSection = id;
+            break;
+          }
+        }
+      }
+
+      if (newActiveSection && newActiveSection !== activeBigImgSection) {
+        setActiveBigImgSection(newActiveSection);
       }
     };
 
@@ -79,7 +80,7 @@ const Parallax = ({ setIsParallax }) => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, []);
+  }, [activeBigImgSection]);
 
   // 배경색 변경
   useEffect(() => {
@@ -90,10 +91,13 @@ const Parallax = ({ setIsParallax }) => {
       const viewportCenter = window.innerHeight / 1.3;
       const isIntersecting =
         rect.top < viewportCenter && rect.bottom > viewportCenter;
-      isIntersecting
-        ? document.querySelector("html").classList.add("parallax")
-        : document.querySelector("html").classList.remove("parallax");
-      isIntersecting ? setIsParallax(true) : setIsParallax(false);
+      if (isIntersecting) {
+        document.querySelector("html").classList.add("parallax");
+        setIsParallax(true);
+      } else {
+        document.querySelector("html").classList.remove("parallax");
+        setIsParallax(false);
+      }
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll);
@@ -104,7 +108,7 @@ const Parallax = ({ setIsParallax }) => {
       document.querySelector("html").classList.remove("parallax");
       setIsParallax(false);
     };
-  }, []);
+  }, [setIsParallax]);
 
   // lgText 타이핑 + smText section 위치 체크
   useEffect(() => {
