@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <Container isHome={true} isParallax={isParallax}>
       <HomeMain mobile={isMobile} />
-      <Parallax setIsParallax={setIsParallax} />
+      {/* <Parallax setIsParallax={setIsParallax} /> */}
       <div style={{width: '100%', height: '100vh'}}></div>
     </Container>
   );
