@@ -1,0 +1,104 @@
+@use "../../../assets/styles/mixin.scss" as *;
+@use "../../../assets/styles/variables.scss" as *;
+
+.nagumoTMIContainer {
+  padding: 0 20px;
+  max-width: 1000px;
+  .title {
+    @include font-style($font-eng, 28px, 500, var(--font-color));
+  }
+  .desc {
+    @include font-style($font-basic, 14px, 400, var(--font-color));
+    margin: 4px 0 20px;
+  }
+}
+
+// nagumoTMIBox
+.nagumoTMIBox {
+  border: 1px solid var(--font-color);
+  .nagumoDiceWrap {
+    display: flex;
+    position: relative;
+    img {
+      width: 100%;
+    }
+  }
+  .tmiTextBOx {
+    display: flex;
+    border-top: 1px solid #000;
+    min-height: 132px;
+  }
+  .tmiText {
+    width: 70%;
+    background-color: #fff;
+    @include font-style($font-basic, 15px, 400, #000);
+    padding: 18px 16px 22px;
+    p {
+      white-space: pre-line;
+      line-height: 23px;
+    }
+    p + p {
+      margin-top: 3px;
+    }
+  }
+  .rollingBtn {
+    width: 30%;
+    background-color: #000;
+    @include font-style($font-basic, 20px, 700, #fff);
+    line-height: 24px;
+    text-align: center;
+  }
+}
+
+// PC ver
+.nagumoTMIContainer.pc {
+  padding: 0 30px;
+  .title {
+    font-size: 38px
+  }
+  .desc {
+    font-size: 18px;
+    margin: 5px 0 24px;
+  }
+  .nagumoTMIBox {
+    display: flex;
+    max-height: 530px;
+    .nagumoDiceWrap {
+      width: 70%;
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+    .tmiTextBOx {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      border-top: 0;
+      border-left: 1px solid #000;
+      min-height: 100%;
+    }
+    .tmiText {
+      width: 100%;
+      height: 100%;
+      padding: 30px 25px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        font-size: 18px;
+        line-height: 25px;
+      }
+      p + p {
+        margin-top: 8px;
+      }
+    }
+    .rollingBtn {
+      flex-shrink: 0;
+      width: 100%;
+      height: 150px;
+      font-size: 32px;
+      line-height: 45px;
+    }
+  }
+}
