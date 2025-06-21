@@ -1,0 +1,41 @@
+@use "../../assets/styles/mixin.scss" as *;
+@use "../../assets/styles/variables.scss" as *;
+
+.navigation {
+  ul {
+    padding: 101px 20px 0;
+  }
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.8%;
+    a {
+      @include font-style($font-eng, clamp(47px, 11vw, 68px), 500, var(--font-color));
+      line-height: clamp(47px, 11vw, 68px);
+      letter-spacing: -2px;
+    }
+    span {
+      @include font-style($font-eng, clamp(14px, 3vw, 18px), 500, var(--font-color));
+      line-height: 14px;
+      margin-top: clamp(7px, 1.8vw, 15px);
+    }
+    & + li {
+      margin-top: 44px;
+    }
+  }
+}
+
+// pc ver
+.navigation.pc {
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  li {
+    gap: 30px;
+    a {
+      letter-spacing: -2.5px;
+    }
+  }
+}

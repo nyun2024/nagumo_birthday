@@ -57,7 +57,7 @@ const HomeMain = ({ mobile }) => {
               <h3>
                 <span>Nagumo</span>Yoichi{mobile ? <br /> : " "}Days
               </h3>
-              <p>Happy Birthday{mobile ? <br /> : " "}1995.07.09</p>
+              <p>Happy Birthday{mobile ? <br /> : " "}1993.07.09</p>
             </>
           ) : (
             <img src={pcTitle} alt="" />
