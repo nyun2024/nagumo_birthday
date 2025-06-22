@@ -81,14 +81,16 @@ const Header = ({ mobile, isParallax }) => {
           isParallax && styles.isParallax
         )}
       >
-        <button type="button" className={styles.btnMenu} onClick={() => setNavOpen(true)}>
-          <span className="blind">navigation</span>
-        </button>
-        <Link to="/" className={styles.linkHome}></Link>
-        <label className={styles.modeSwitch}>
-          <input type="checkbox" checked={isDark} onChange={toggleTheme} />
-          <span className={styles.slider}></span>
-        </label>
+        <div className={styles.headerInner}>
+          <button type="button" className={styles.btnMenu} onClick={() => setNavOpen(true)}>
+            <span className="blind">navigation</span>
+          </button>
+          <Link to="/" className={styles.linkHome}></Link>
+          <label className={styles.modeSwitch}>
+            <input type="checkbox" checked={isDark} onChange={toggleTheme} />
+            <span className={styles.slider}></span>
+          </label>
+        </div>
       </header>
       {
         navOpen &&

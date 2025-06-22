@@ -2,7 +2,7 @@
 @use "../../../assets/styles/variables.scss" as *;
 
 .nagumoTMIContainer {
-  padding: 0 20px;
+  padding: 48px 20px 0;
   max-width: 1000px;
   .title {
     @include font-style($font-eng, 28px, 500, var(--font-color));

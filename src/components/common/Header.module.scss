@@ -1,16 +1,22 @@
 .header {
-  width: 100%;
-  max-width: 1000px;
-  height: 48px;
-  background-color: var(--bg-color);
+  width: 100vw;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px 0 13px;
+  justify-content: center;
+  background-color: var(--bg-color);
+  left: 0;
   position: fixed;
   top: 0;
   transition: transform 0.3s ease;
   z-index: 999;
+  .headerInner {
+    width: 100%;
+    max-width: 1000px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px 0 13px;
+  }
 }
 .visible {
   transform: translateY(0%);
@@ -111,8 +117,10 @@
 
 // pc
 .pc.header {
-  height: 56px;
-  padding: 0 20px;
+  .headerInner {
+    height: 56px;
+    padding: 0 20px;
+  }
   .btnMenu {
     width: 40px;
     height: 40px;
