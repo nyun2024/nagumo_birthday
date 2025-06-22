@@ -1,0 +1,49 @@
+@use "../../../assets/styles/mixin.scss" as *;
+@use "../../../assets/styles/variables.scss" as *;
+
+.textLineWrap {
+  margin: 30% 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .textInner {
+    position: relative;
+  }
+  .text {
+    @include font-style($font-japen, 45px, 500, var(--font-color));
+    line-height: 50px;
+    text-align: center;
+    &.changeColor {
+      color: #fff;
+    }
+  }
+  .circleLine {
+    position: absolute;
+    top: 0;
+    right: 24px;
+  }
+  .waveLine {
+    position: absolute;
+    left: 13px;
+    bottom: -12px;
+  }
+}
+
+.circleLine, .waveLine {
+  path {
+    stroke: #FF0000;
+    fill: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 1.5s ease;
+  }
+}
+.animateLine {
+  animation: drawLine 2s ease forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
