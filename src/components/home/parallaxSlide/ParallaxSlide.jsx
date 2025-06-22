@@ -12,28 +12,32 @@ const ParallaxSlide = () => {
   const keys = Object.keys(SlideImages);
 
   // 슬라이드 넘어갈때 text 타이핑 효과
-  useEffect(() => {
-    const fullText = SlideImages[Object.keys(SlideImages)[currentIndex]].text;
+    useEffect(() => {
+    const fullText = SlideImages[slideKeys[currentIndex]].text;
     setTypedText("");
+
+    const intervalRef = { id: null };
 
     const timeoutId = setTimeout(() => {
       let current = 0;
-      const intervalId = setInterval(() => {
+      intervalRef.id = setInterval(() => {
         const nextChar = fullText?.[current];
         if (nextChar !== undefined) {
           setTypedText((prev) => prev + nextChar);
           current++;
         } else {
-          clearInterval(intervalId);
+          clearInterval(intervalRef.id);
         }
       }, 50);
     }, 500);
 
     return () => {
       clearTimeout(timeoutId);
+      clearInterval(intervalRef.id); // ✅ 이전 타이핑 중단
     };
   }, [currentIndex]);
 
+console.log(currentIndex)
   // 슬라이드 prev, next
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + keys.length) % keys.length);
@@ -109,10 +113,14 @@ const ParallaxSlide = () => {
           </p>
         </div>
       )}
-      <div className={styles.slidePagination}>
-        <button type="button" onClick={handlePrev}>◀</button>
-        <div>{currentIndex + 1} / {totalSlides}</div>
-        <button type="button" onClick={handleNext}>▶</button>
+      <div className={classNames(styles.slidePagination, currentIndex === 1 && styles.sec02Page)}>
+        <button type="button" className={styles.prevBtn} onClick={handlePrev}>
+          <span className="blind">prev button</span>
+        </button>
+        <div className={styles.pageNum}>{currentIndex + 1} / {totalSlides}</div>
+        <button type="button" className={styles.nextBtn} onClick={handleNext}>
+          <span className="blind">next button</span>
+        </button>
       </div>
     </div>
   )

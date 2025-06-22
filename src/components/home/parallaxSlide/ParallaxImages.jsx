@@ -35,7 +35,7 @@ export const SlideImages = {
   sec03: {
     big: [sec03_big],
     small: [sec03_1, sec03_2, sec03_3, sec03_4, sec03_5, sec03_6],
-    text: "殺しに必要なのは嘘でしょ",
+    text: "殺しに必要なのは\n嘘でしょ",
   },
 };
 

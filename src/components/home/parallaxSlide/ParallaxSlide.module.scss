@@ -13,7 +13,6 @@
   max-width: 100vw;
   min-height: 103vh;
   height: 150vw;
-  // overflow: hidden;
   opacity: 0;
   pointer-events: none;
   position: absolute;
@@ -48,6 +47,7 @@
   width: 100%;
   position: absolute;
   bottom: 0;
+  z-index: 10;
 }
 .smallImg {
   display: flex;
@@ -63,14 +63,48 @@
 .typingText {
   position: absolute;
   @include font-style($font-japen, 18px, 500, #fff);
+  line-height: 24px;
   white-space: pre-line;
+  z-index: 11;
 }
 
+.slidePagination {
+  position: absolute;
+  bottom: 4.5%;
+  left: 2.5%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 2px;
+  z-index: 11;
+  .pageNum {
+    @include font-style($font-basic, 18px, 400, #fff);
+    margin-bottom: 2px;
+  }
+  .prevBtn {
+    width: 38px;
+    height: 38px;
+    background-image: url(../../../assets/img/common/left_btn.png);
+    background-size: cover;
+  }
+  .nextBtn {
+    width: 38px;
+    height: 38px;
+    background-image: url(../../../assets/img/common/right_btn.png);
+    background-size: cover;
+  }
+  &.sec02Page {
+    top: 53.5%;
+    bottom: auto;
+    left: auto;
+    right: 0.5%;
+  }
+}
+
+// section01
 .sec01SlideItem {
   .sec01BigImg {
     width: 73%;
-    position: absolute;
-    z-index: 10;
     right: 0;
   }
   .small01 {
@@ -102,25 +136,87 @@
     writing-mode: vertical-rl;
     top: 38%;
     left: 5%;
-    line-height: 24px;
     width: 73px;
   }
 }
 
-.slidePagination {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-  button {
-    font-size: 1.5rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #fff;
+//section02
+.sec02SlideItem {
+  .sec02BigImg {
+    width: 100%;
+    right: 0;
+  }
+  .small01 {
+    width: 24%;
+    top: 9%;
+    left: 10%;
+  }
+  .small02 {
+    width: 22%;
+    top: 15%;
+    right: 0;
+  }
+  .small03 {
+    width: 16%;
+    top: 26%;
+    right: 35%;
+  }
+  .small04 {
+    width: 30%;
+    top: 42%;
+    left: 2%;
+  }
+  .small05 {
+    width: 30%;
+    top: 48%;
+    right: 0;
+  }
+  .typingText {
+    top: 51%;
+    left: 22%;
+  }
+}
+
+//section03
+.sec03SlideItem {
+  .sec03BigImg {
+    width: 86%;
+    left: 10%;
+  }
+  .small01 {
+    width: 21%;
+    top: 6%;
+    left: 40%;
+  }
+  .small02 {
+    width: 25%;
+    top: 23%;
+    left: 5%;
+  }
+  .small03 {
+    width: 31%;
+    top: 24%;
+    right: 10%;
+  }
+  .small04 {
+    width: 17%;
+    top: 55%;
+    right: 2%;
+  }
+  .small05 {
+    width: 31%;
+    top: 73%;
+    left: 0;
+  }
+  .small06 {
+    width: 30%;
+    top: 86%;
+    right: 0;
+  }
+  .typingText {
+    writing-mode: vertical-rl;
+    top: 45%;
+    left: 10%;
+    width: 50px;
   }
 }

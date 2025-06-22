@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import styles from './TextLine.module.scss'
-import classNames from "classnames";
 import useDarkMode from "@utils/useDarkMode";
 
 const TextLine = ({ isParallax }) => {
