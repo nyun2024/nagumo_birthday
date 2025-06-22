@@ -8,6 +8,7 @@
   justify-content: center;
   .textInner {
     position: relative;
+    height: 100px
   }
   .text {
     @include font-style($font-japen, 45px, 500, var(--font-color));
