@@ -10,24 +10,15 @@
     position: relative;
     height: 100px
   }
-  .text {
-    height: 100px;
-    @include font-style($font-japen, 45px, 500, var(--font-color));
-    line-height: 50px;
-    text-align: center;
-    &.changeColor {
-      color: #fff;
-    }
-  }
   .circleLine {
     position: absolute;
-    top: 0;
-    right: 24px;
+    top: -4px;
+    right: 19px;
   }
   .waveLine {
     position: absolute;
     left: 13px;
-    bottom: -12px;
+    bottom: -9px;
   }
 }
 
