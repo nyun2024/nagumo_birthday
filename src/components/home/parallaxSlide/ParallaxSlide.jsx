@@ -37,7 +37,6 @@ const ParallaxSlide = () => {
     };
   }, [currentIndex]);
 
-console.log(currentIndex)
   // 슬라이드 prev, next
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + keys.length) % keys.length);
@@ -74,53 +73,55 @@ console.log(currentIndex)
 
   return (
     <div  className={styles.parallaxSlideWrapper}>
-      {Object.entries(SlideImages).map(([key, item], index) =>
-        <div
-          className={classNames(
-            styles.slideItem,
-            styles[`${key}SlideItem`],
-            index === currentIndex && styles.activeSlide
-          )}
-          key={`slide-${index}`}
-        >
-          <img
-            key={`big-${key}-${index}`}
-            src={item.big}
+      <div className={styles.parallaxSlideInner}> 
+        {Object.entries(SlideImages).map(([key, item], index) =>
+          <div
             className={classNames(
-              styles.bigImg,
-              styles[`${key}BigImg`],
-              index === currentIndex && styles.fadeIn
+              styles.slideItem,
+              styles[`${key}SlideItem`],
+              index === currentIndex && styles.activeSlide
             )}
-          />
-          {item.small.map((smallItem, i) => (
-            <div
-              className={classNames(styles.smallImg, styles[`small0${i + 1}`])}
-              key={`small-${i}`}
-              ref={(el) => {
-                if (el) smallImgRefs.current[`${key}-${i}`] = el;
-              }}
-              data-speed={(i + 1) * 0.05}
-            >
-              <img src={smallItem} alt="small img" />
-            </div>
-          ))}
-          <p className={styles.typingText}>
-            {typedText.split("").map((char, i) => (
-              <span key={i} className={styles.typingChar} style={{ animationDelay: `${i * 0.03}s` }}>
-                {char}
-              </span>
+            key={`slide-${index}`}
+          >
+            <img
+              key={`big-${key}-${index}`}
+              src={item.big}
+              className={classNames(
+                styles.bigImg,
+                styles[`${key}BigImg`],
+                index === currentIndex && styles.fadeIn
+              )}
+            />
+            {item.small.map((smallItem, i) => (
+              <div
+                className={classNames(styles.smallImg, styles[`small0${i + 1}`])}
+                key={`small-${i}`}
+                ref={(el) => {
+                  if (el) smallImgRefs.current[`${key}-${i}`] = el;
+                }}
+                data-speed={(i + 1) * 0.05}
+              >
+                <img src={smallItem} alt="small img" />
+              </div>
             ))}
-          </p>
+            <p className={styles.typingText}>
+              {typedText.split("").map((char, i) => (
+                <span key={i} className={styles.typingChar} style={{ animationDelay: `${i * 0.03}s` }}>
+                  {char}
+                </span>
+              ))}
+            </p>
+          </div>
+        )}
+        <div className={classNames(styles.slidePagination, currentIndex === 1 && styles.sec02Page)}>
+          <button type="button" className={styles.prevBtn} onClick={handlePrev}>
+            <span className="blind">prev button</span>
+          </button>
+          <div className={styles.pageNum}>{currentIndex + 1} / {totalSlides}</div>
+          <button type="button" className={styles.nextBtn} onClick={handleNext}>
+            <span className="blind">next button</span>
+          </button>
         </div>
-      )}
-      <div className={classNames(styles.slidePagination, currentIndex === 1 && styles.sec02Page)}>
-        <button type="button" className={styles.prevBtn} onClick={handlePrev}>
-          <span className="blind">prev button</span>
-        </button>
-        <div className={styles.pageNum}>{currentIndex + 1} / {totalSlides}</div>
-        <button type="button" className={styles.nextBtn} onClick={handleNext}>
-          <span className="blind">next button</span>
-        </button>
       </div>
     </div>
   )

@@ -2,17 +2,21 @@
 @use "../../../assets/styles/variables.scss" as *;
 
 .parallaxSlideWrapper {
-  position: relative;
   overflow: hidden;
   max-width: 100vw;
-  min-height: 103vh;
-  height: 150vw;
+  min-height: 700px;
+  height: clamp(90vh, 150vw, 150vw);
   margin-top: 100px;
+  //padding-top: 17%;
+  .parallaxSlideInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 .slideItem {
-  max-width: 100vw;
-  min-height: 103vh;
-  height: 150vw;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   pointer-events: none;
   position: absolute;
@@ -62,8 +66,8 @@
 }
 .typingText {
   position: absolute;
-  @include font-style($font-japen, 18px, 500, #fff);
-  line-height: 24px;
+  @include font-style($font-japen, clamp(18px, 5vw, 45px), 500, #fff);
+  line-height: clamp(24px, 5.6vw, 51px);;
   white-space: pre-line;
   z-index: 11;
 }
