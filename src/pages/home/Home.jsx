@@ -57,7 +57,7 @@ const Home = () => {
       ([entry]) => {
         setIsNavVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.5 }
     );
 
     observer.observe(navRef.current);
