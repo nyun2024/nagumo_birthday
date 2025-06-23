@@ -2,20 +2,34 @@
 @use "../../assets/styles/variables.scss" as *;
 
 .navigation {
+  max-width: 1024px;
+  transform: translate(-50%);
+  position: relative;
+  left: 50%;
   ul {
-    padding: 100px 20px;
+    padding: 110px 20px;
   }
   li {
     display: flex;
     align-items: flex-start;
     gap: 2.8%;
     a {
-      @include font-style($font-eng, clamp(47px, 11vw, 68px), 500, var(--font-color));
+      @include font-style(
+        $font-eng,
+        clamp(47px, 11vw, 68px),
+        500,
+        var(--font-color)
+      );
       line-height: clamp(47px, 11vw, 68px);
       letter-spacing: -2px;
     }
     span {
-      @include font-style($font-eng, clamp(14px, 3vw, 18px), 500, var(--font-color));
+      @include font-style(
+        $font-eng,
+        clamp(14px, 3vw, 18px),
+        500,
+        var(--font-color)
+      );
       line-height: 14px;
       margin-top: clamp(7px, 1.8vw, 15px);
     }
@@ -31,6 +45,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 170px 40px 180px;
   }
   li {
     gap: 30px;

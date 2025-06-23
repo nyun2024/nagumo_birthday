@@ -2,29 +2,37 @@
 @use "../../../assets/styles/variables.scss" as *;
 
 .textLineWrap {
-  margin: 30% 0 40%;
+  margin: 25% 0 30%;
   display: flex;
   align-items: center;
   justify-content: center;
   .textInner {
     position: relative;
-    height: 100px
+  }
+  .text {
+    width: clamp(249px, 55vw, 480px);
   }
   .circleLine {
+    width: clamp(119px, 26vw, 230px);
     position: absolute;
     top: -4px;
-    right: 19px;
+    right: 7.5%;
   }
   .waveLine {
+    width: clamp(230px, 52vw, 453px);
     position: absolute;
-    left: 13px;
-    bottom: -9px;
+    left: 4%;
+    bottom: -10%;
+  }
+  &.pc {
+    margin: 150px 0 140px;
   }
 }
 
-.circleLine, .waveLine {
+.circleLine,
+.waveLine {
   path {
-    stroke: #FF0000;
+    stroke: #ff0000;
     fill: none;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
@@ -32,7 +40,7 @@
   }
 }
 .animateLine {
-  animation: drawLine 2s ease forwards;
+  animation: drawLine 3s ease forwards;
 }
 
 @keyframes drawLine {

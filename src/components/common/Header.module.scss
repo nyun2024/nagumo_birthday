@@ -10,7 +10,7 @@
   z-index: 999;
   .headerInner {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1024px;
     height: 48px;
     display: flex;
     align-items: center;
@@ -158,7 +158,7 @@
   }
 }
 
-// nav 
+// nav
 .navPopup {
   position: fixed;
   top: 0;
@@ -173,7 +173,7 @@
   z-index: 9999;
   .navPopupInner {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1024px;
     height: 100%;
     position: relative;
     overflow-y: scroll;
@@ -184,12 +184,12 @@
     }
     ul {
       padding-top: 148px;
-      padding-bottom: 100px; 
+      padding-bottom: 100px;
     }
   }
   .navTop {
     width: 100vw;
-    max-width: 1000px;
+    max-width: 1024px;
     height: 48px;
     display: flex;
     align-items: center;
@@ -199,6 +199,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10;
   }
   .closeButton {
     width: 34px;
