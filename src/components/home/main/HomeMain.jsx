@@ -41,6 +41,7 @@ const HomeMain = ({ mobile, videoRef }) => {
           muted
           playsInline
           preload="auto"
+          autoPlay
           className={styles.mainVideo}
         >
           <source src={video} type="video/mp4"></source>

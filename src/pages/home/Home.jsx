@@ -24,27 +24,27 @@ const Home = () => {
   const videoRef = useRef(null);
   const isDark = useDarkMode();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsMinTimePassed(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsMinTimePassed(true);
+  //   }, 2000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   if (!video) return;
 
-    const handleCanPlayThrough = () => {
-      setIsVideoLoaded(true);
-    };
+  //   const handleCanPlayThrough = () => {
+  //     setIsVideoLoaded(true);
+  //   };
 
-    video.addEventListener("canplaythrough", handleCanPlayThrough);
+  //   video.addEventListener("canplaythrough", handleCanPlayThrough);
 
-    return () => {
-      video.removeEventListener("canplaythrough", handleCanPlayThrough);
-    };
-  }, []);
+  //   return () => {
+  //     video.removeEventListener("canplaythrough", handleCanPlayThrough);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const video = videoRef.current;
