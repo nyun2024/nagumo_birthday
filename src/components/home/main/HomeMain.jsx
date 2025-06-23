@@ -1,4 +1,5 @@
 import video from "@assets/video/nagumo_video.mp4";
+import webp from "@assets/video/nagumo_video.webp";
 import styles from "./HomeMain.module.scss";
 import classNames from "classnames";
 import mini01 from "@img/home/main/main_sBox_01.jpg";
@@ -33,7 +34,8 @@ const HomeMain = ({ mobile, videoRef }) => {
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        <video
+        <img src={webp} alt="animation" />
+        {/* <video
           ref={videoRef}
           loop
           muted
@@ -42,7 +44,7 @@ const HomeMain = ({ mobile, videoRef }) => {
           className={styles.mainVideo}
         >
           <source src={video} type="video/mp4"></source>
-        </video>
+        </video> */}
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
             return item.isNameJapen ? (
