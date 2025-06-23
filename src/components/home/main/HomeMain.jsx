@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import video from "@assets/video/nagumo_video.mp4";
+import poster from "@assets/video/video_poster.jpg";
 import webp from "@assets/video/nagumo_video.webp";
 import styles from "./HomeMain.module.scss";
 import classNames from "classnames";
@@ -38,22 +39,26 @@ const HomeMain = ({ mobile, videoRef }) => {
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        {videoError ? (
-          <img src={webp} alt="fallback animation" className={styles.mainVideo} />
-        ) : (
-          <video
-            ref={videoRef}
-            loop
-            muted
-            playsInline
-            autoPlay
-            preload="auto"
-            className={styles.mainVideo}
-            onError={() => setVideoError(true)}
-          >
-            <source src={video} type="video/mp4" />
-          </video>
-        )}
+        <div className={styles.videoWrap}>
+          {videoError ? (
+            <img src={webp} alt="fallback animation" className={styles.mainVideo} />
+          ) : (
+            <video
+              ref={videoRef}
+              loop
+              muted
+              playsInline
+              autoPlay
+              preload="auto"
+              className={styles.mainVideo}
+              onError={() => setVideoError(true)}
+              poster={poster}
+            >
+              <source src={video} type="video/mp4" />
+            </video>
+          )}
+          <img src={poster} className={styles.videoPoster} />
+        </div>
 
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
