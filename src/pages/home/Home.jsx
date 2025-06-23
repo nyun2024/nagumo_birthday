@@ -12,40 +12,57 @@ import classNames from "classnames";
 import styles from "./Home.module.scss";
 
 const Home = () => {
-  const [isNavVisible, setIsNavVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isMinTimePassed, setIsMinTimePassed] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
   const [isParallax, setIsParallax] = useState(false);
+
   const isMobile = useIsMobile();
   const containerRef = useRef(null);
-  const isDark = useDarkMode();
   const navRef = useRef(null);
   const videoRef = useRef(null);
+  const isDark = useDarkMode();
 
   useEffect(() => {
-    // WebCam 이미지 초기화
-    localStorage.removeItem("filteredImages");
-    localStorage.setItem("saveEdit", false);
-
-    // Loading
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setIsMinTimePassed(true);
     }, 2000);
-
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (!isLoading && videoRef.current) {
-      videoRef.current
-        .play()
-        .then(() => {
-          console.log("비디오 재생 시작됨");
-        })
-        .catch((err) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlayThrough = () => {
+      setIsVideoLoaded(true);
+    };
+
+    video.addEventListener("canplaythrough", handleCanPlayThrough);
+
+    return () => {
+      video.removeEventListener("canplaythrough", handleCanPlayThrough);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (isVideoLoaded && isMinTimePassed) {
+      setIsLoading(false);
+      if (video) {
+        video.play().catch((err) => {
           console.warn("비디오 재생 실패", err);
         });
+      }
     }
-  }, [isLoading]);
+  }, [isVideoLoaded, isMinTimePassed]);
+
+  // WebCam 이미지 초기화
+  useEffect(() => {
+    localStorage.removeItem("filteredImages");
+    localStorage.setItem("saveEdit", false);
+  }, []);
 
   // 배경색 전환
   useEffect(() => {
@@ -78,7 +95,7 @@ const Home = () => {
     };
   }, [isNavVisible]);
 
-  // 네비게이션 보이면 배경색 전환
+  // 네비게이션 보임 여부 관찰
   useEffect(() => {
     if (!navRef.current) return;
 
@@ -98,7 +115,7 @@ const Home = () => {
 
   return (
     <>
-      {isLoading ? <Loading /> : ""}
+      {isLoading && <Loading />}
       <Container isHome={true} isParallax={isParallax}>
         <HomeMain mobile={isMobile} videoRef={videoRef} />
         <div ref={containerRef}>
