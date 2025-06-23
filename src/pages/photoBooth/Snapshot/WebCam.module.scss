@@ -1,0 +1,338 @@
+@use "../../../assets/styles/mixin.scss" as *;
+@use "../../../assets/styles/variables" as *;
+
+.webCamContainer {
+  min-height: calc(100dvh - 46px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0 50px;
+
+  .webCamInner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cameraWebCam {
+    display: inline-flex;
+    position: relative;
+  }
+  .cameraImg {
+    position: relative;
+    z-index: 10;
+    top: 0;
+    left: 0;
+  }
+  .captureBtn {
+    position: absolute;
+    z-index: 11;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+  }
+  .webCamFrame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    .frameBoxImg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 9;
+    }
+    .countdown {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+    }
+  }
+  .webCamVideo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .filterButtons {
+    padding-bottom: 15px;
+  }
+  // 가로 타입
+  .horizontalCameraWebCamWrap {
+    .cameraWebCam {
+      max-width: 750px;
+      min-width: 400px;
+    }
+    .cameraImg {
+      width: 60vw;
+      max-width: 750px;
+      min-width: 400px;
+    }
+    .captureBtn {
+      bottom: 17%;
+      right: 8.5%;
+      width: 9.2vw;
+      height: 9.2vw;
+      min-width: 60px;
+      min-height: 60px;
+      @include font-style($font-basic, clamp(25px, 4vw, 50px), 700, #222);
+      @media (min-width: 1252px) {
+        width: 115px;
+        height: 115px;
+      }
+    }
+    .webCamFrame {
+      padding: 12% 30% 4.5% 7%;
+      @media (min-width: 1252px) {
+        padding: 88px 225px 34px 50px;
+      }
+      .frameBoxImg {
+        padding: 12% 30% 4.5% 7%;
+        @media (min-width: 1252px) {
+          padding: 88px 225px 34px 50px;
+        }
+      }
+      .countdown {
+        @include font-style($font-basic, clamp(55px, 8vw, 70px), 700, #fff);
+        top: 55%;
+        left: 36%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  // 세로 타입
+  .verticalCameraWebCamWrap {
+    .cameraWebCam {
+      max-width: 580px;
+      min-width: 310px;
+    }
+    .cameraImg {
+      width: 60vw;
+      max-width: 580px;
+      min-width: 310px;
+    }
+    .captureBtn {
+      bottom: 27%;
+      right: 5.7%;
+      width: 15vw;
+      height: 15vw;
+      min-width: 75px;
+      min-height: 75px;
+      max-width: 147px;
+      max-height: 147px;
+      background-color: #e3e2e2;
+      @include font-style($font-basic, clamp(30px, 6vw, 60px), 700, #222);
+    }
+    .webCamFrame {
+      padding: 19.5% 36.7% 9.5% 10.5%;
+      @media (min-width: 1252px) {
+        padding: 112px 212px 55px 62px;
+      }
+      .frameBoxImg {
+        padding: 19.5% 36.7% 9.5% 10.5%;
+        @media (min-width: 1252px) {
+          padding: 112px 212px 55px 62px;
+        }
+      }
+      .countdown {
+        @include font-style($font-basic, clamp(55px, 8vw, 70px), 700, #fff);
+        top: 55%;
+        left: 36%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .webCamEtc {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 5%;
+    .photoLength {
+      font-size: 20px;
+      margin-right: 30px;
+    }
+    button {
+      height: 40px;
+      padding: 5px 16px;
+      @include font-style($font-basic, 18px, 700, #222);
+      background-color: #fff;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 5px;
+    }
+  }
+  &.mobile.isVerMobileOnly {
+    .filterButtons {
+      padding: 0 20px 15px 20px;
+      text-align: center;
+    }
+    .webCamEtc {
+      margin-top: 7px;
+      justify-content: center;
+      .photoLength {
+        font-size: 17px;
+        margin-right: 16px;
+      }
+      button {
+        height: 28px;
+        padding: 5px 10px;
+        @include font-style($font-basic, 15px, 700, #222);
+      }
+    }
+  }
+  &.mobile.isHorMobileOnly {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-height: unset;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 9999;
+    display: block;
+    .webCamInner {
+      transform: translate(0, -100vw) rotate(90deg);
+      transform-origin: left bottom;
+      width: 100dvh;
+      height: 100vw;
+      min-width: 600px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 16px;
+      padding: 0 20px;
+    }
+    .filterButtons {
+      width: auto;
+      height: 100%;
+      min-width: 85px;
+      overflow-y: auto;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 0;
+    }
+    .webCamFrame {
+      .countdown {
+        @include font-style($font-basic, 55px, 700, #fff);
+      }
+    }
+    .cameraWebCamWrap {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cameraWebCam {
+      display: inline-flex;
+      position: relative;
+      width: 95dvh;
+      max-width: 440px;
+      min-width: unset;
+    }
+    .cameraImg {
+      width: 95dvh;
+      max-width: 440px;
+      min-width: unset;
+      position: relative;
+      z-index: 10;
+      top: 0;
+      left: 0;
+    }
+    .captureBtn {
+      position: absolute;
+      bottom: 17.5%;
+      right: 8.8%;
+      z-index: 11;
+      background-color: #d9d9d9;
+      width: 14.3dvh;
+      height: 14.3dvh;
+      max-width: 66px;
+      max-height: 66px;
+      min-width: unset;
+      min-height: unset;
+      border-radius: 50%;
+      @include font-style(
+        $font-basic,
+        clamp(27px, 3.4dvh, 30px),
+        700,
+        #222
+      );
+    }
+    .webCamEtc {
+      margin-top: 7px;
+      justify-content: center;
+      .photoLength {
+        font-size: 17px;
+        margin-right: 16px;
+      }
+      button {
+        height: 28px;
+        padding: 5px 10px;
+        @include font-style($font-basic, 15px, 700, #222);
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1.7s infinite;
+}
+
+.layerMobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 105;
+  .dim {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .layerContainer {
+    width: 250px;
+    background-color: #fff;
+    position: relative;
+    z-index: 101;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .layerContent {
+    text-align: center;
+    @include font-style($font-basic, 17px, 400, #222);
+    padding: 36px 0 36px;
+    border-bottom: 1px solid #b7b7b7;
+  }
+  .closeBtn {
+    width: 100%;
+    height: 50px;
+    @include font-style($font-basic, 17px, 700, $blue);
+  }
+}
