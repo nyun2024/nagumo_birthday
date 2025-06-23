@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import video from "@assets/video/nagumo_video.mp4";
 import webp from "@assets/video/nagumo_video.webp";
 import styles from "./HomeMain.module.scss";
@@ -20,6 +21,8 @@ import useDarkMode from "@utils/useDarkMode";
 
 const HomeMain = ({ mobile, videoRef }) => {
   const isDark = useDarkMode();
+  const [videoError, setVideoError] = useState(false);
+
   const miniBoxs = [
     { src: mini01 },
     { src: mini02 },
@@ -29,31 +32,38 @@ const HomeMain = ({ mobile, videoRef }) => {
       isNameJapen: mobile ? true : false,
     },
   ];
+
   return (
     <div
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        {/* <img src={webp} alt="animation" /> */}
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          preload="auto"
-          autoPlay
-          className={styles.mainVideo}
-        >
-          <source src={video} type="video/mp4"></source>
-        </video>
+        {videoError ? (
+          <img src={webp} alt="fallback animation" className={styles.mainVideo} />
+        ) : (
+          <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            autoPlay
+            preload="auto"
+            className={styles.mainVideo}
+            onError={() => setVideoError(true)}
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+        )}
+
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
             return item.isNameJapen ? (
               <div
+                key={num}
                 style={{ backgroundImage: `url(${item.src})` }}
                 className={classNames(
-                  item.isNameJapen ? (isDark ? styles.dark : styles.light) : "",
-                  item.isNameJapen && styles.nameJapen
+                  isDark ? styles.dark : styles.light,
+                  styles.nameJapen
                 )}
               ></div>
             ) : (
@@ -61,6 +71,7 @@ const HomeMain = ({ mobile, videoRef }) => {
             );
           })}
         </div>
+
         <div className={styles.mainTitle}>
           {mobile ? (
             <>
@@ -74,6 +85,7 @@ const HomeMain = ({ mobile, videoRef }) => {
           )}
         </div>
       </div>
+
       <div className={styles.sectionPart2}>
         {mobile ? (
           <div
@@ -81,8 +93,8 @@ const HomeMain = ({ mobile, videoRef }) => {
               backgroundImage: `url(${isDark ? nameJapen02_dark : nameJapen02_light})`,
             }}
             className={classNames(
-              mobile ? (isDark ? styles.dark : styles.light) : "",
-              mobile && styles.nameJapen
+              isDark ? styles.dark : styles.light,
+              styles.nameJapen
             )}
           ></div>
         ) : (
@@ -105,6 +117,7 @@ const HomeMain = ({ mobile, videoRef }) => {
           />
         </div>
       </div>
+
       {mobile && (
         <div className={styles.sectionPart3}>
           <img src={longBox} className={styles.longBox} alt="" />
