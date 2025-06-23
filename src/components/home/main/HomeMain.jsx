@@ -34,8 +34,8 @@ const HomeMain = ({ mobile, videoRef }) => {
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        <img src={webp} alt="animation" />
-        {/* <video
+        {/* <img src={webp} alt="animation" /> */}
+        <video
           ref={videoRef}
           loop
           muted
@@ -44,7 +44,7 @@ const HomeMain = ({ mobile, videoRef }) => {
           className={styles.mainVideo}
         >
           <source src={video} type="video/mp4"></source>
-        </video> */}
+        </video>
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
             return item.isNameJapen ? (
