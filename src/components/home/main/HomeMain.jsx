@@ -17,7 +17,7 @@ import pcTitle from "@img/home/main/main_pc_title.png";
 import longBox from "@img/home/main/main_longBox.jpg";
 import useDarkMode from "@utils/useDarkMode";
 
-const HomeMain = ({ mobile }) => {
+const HomeMain = ({ mobile, videoRef }) => {
   const isDark = useDarkMode();
   const miniBoxs = [
     { src: mini01 },
@@ -33,7 +33,14 @@ const HomeMain = ({ mobile }) => {
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
-        <video autoPlay loop muted playsInline className={styles.mainVideo}>
+        <video
+          ref={videoRef}
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className={styles.mainVideo}
+        >
           <source src={video} type="video/mp4"></source>
         </video>
         <div className={styles.imgMiniBoxs}>

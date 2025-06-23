@@ -6,17 +6,46 @@ import NagumoTMI from "@components/home/nagumoTMI/NagumoTMI";
 import Navigation from "@components/common/Navigation";
 import ParallaxSlide from "@components/home/parallaxSlide/ParallaxSlide";
 import TextLine from "@components/home/textLine/TextLine";
+import Loading from "@pages/Loading/Loading";
 import useDarkMode from "@utils/useDarkMode";
 import classNames from "classnames";
-import styles from "./Home.module.scss"
+import styles from "./Home.module.scss";
 
 const Home = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
-  const isMobile = useIsMobile();
+  const [isLoading, setIsLoading] = useState(true);
   const [isParallax, setIsParallax] = useState(false);
+  const isMobile = useIsMobile();
   const containerRef = useRef(null);
   const isDark = useDarkMode();
   const navRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // WebCam 이미지 초기화
+    localStorage.removeItem("filteredImages");
+    localStorage.setItem("saveEdit", false);
+
+    // Loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && videoRef.current) {
+      videoRef.current
+        .play()
+        .then(() => {
+          console.log("비디오 재생 시작됨");
+        })
+        .catch((err) => {
+          console.warn("비디오 재생 실패", err);
+        });
+    }
+  }, [isLoading]);
 
   // 배경색 전환
   useEffect(() => {
@@ -65,22 +94,25 @@ const Home = () => {
     return () => {
       if (navRef.current) observer.unobserve(navRef.current);
     };
-  }, []); 
+  }, []);
 
   return (
-    <Container isHome={true} isParallax={isParallax}>
-      <HomeMain mobile={isMobile} />
-      <div ref={containerRef}>
-        <TextLine isParallax={isParallax} />
-        <ParallaxSlide />
-        <div className={classNames(styles.bottomArea, isDark && styles.dark)}>
-          <NagumoTMI />
-          <div ref={navRef} className={styles.navWrap}>
-            <Navigation />
+    <>
+      {isLoading ? <Loading /> : ""}
+      <Container isHome={true} isParallax={isParallax}>
+        <HomeMain mobile={isMobile} videoRef={videoRef} />
+        <div ref={containerRef}>
+          <TextLine isParallax={isParallax} />
+          <ParallaxSlide />
+          <div className={classNames(styles.bottomArea, isDark && styles.dark)}>
+            <NagumoTMI />
+            <div ref={navRef} className={styles.navWrap}>
+              <Navigation />
+            </div>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
