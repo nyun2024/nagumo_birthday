@@ -115,7 +115,7 @@ const Home = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
       <Container isHome={true} isParallax={isParallax}>
         <HomeMain mobile={isMobile} videoRef={videoRef} />
         <div ref={containerRef}>
