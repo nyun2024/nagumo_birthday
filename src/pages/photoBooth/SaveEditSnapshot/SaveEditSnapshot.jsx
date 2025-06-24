@@ -10,7 +10,7 @@ import classNames from "classnames";
 const SaveEditSnapshot = () => {
   const [images, setImages] = useState([]);
   const [congratulationText, setCongratulationText] = useState(
-    "Happy Birthday\nAsakura Shin"
+    "Happy Birthday\nNagumo Yoichi"
   );
   const [textareaText, setTextareaText] = useState("");
   const [isHorMobileOnly, setisHorMobileOnly] = useState(false);
@@ -62,7 +62,7 @@ const SaveEditSnapshot = () => {
     }
     // 입력값이 없으면 생일문구 노출
     if (newText.length === 0) {
-      setCongratulationText("Happy Birthday\nAsakura Shin");
+      setCongratulationText("Happy Birthday\nNagumo Yoichi");
     }
   };
 
@@ -113,60 +113,62 @@ const SaveEditSnapshot = () => {
         type === "white" && styles.white
       )}
     >
-      <div className={styles.resultFrameWrap} ref={resultRef}>
-        <img src={frame} className={styles.resultFrame} alt="Frame" />
-        <div className={styles.capturedImgWrap}>
-          {images.map((src, index) => (
-            <img
-              key={index}
-              src={src}
-              className={styles.capturedImg}
-              alt={`Captured ${index + 1}`}
-            />
-          ))}
-        </div>
-        {type !== "white" && (
-          <div
-            className={classNames(
-              styles.congratulationText,
-              type === "blue" && styles.blueText
-            )}
-          >
-            {congratulationText.split("\n").map((line, idx) => (
-              <span key={idx}>
-                {line}
-                <br />
-              </span>
+      <div className={styles.saveEditInner}>
+        <div className={styles.resultFrameWrap} ref={resultRef}>
+          <img src={frame} className={styles.resultFrame} alt="Frame" />
+          <div className={styles.capturedImgWrap}>
+            {images.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                className={styles.capturedImg}
+                alt={`Captured ${index + 1}`}
+              />
             ))}
           </div>
-        )}
-      </div>
-      <div className={styles.editSaveEtc}>
-        {type !== "white" && (
-          <div className={styles.textAreaWrap}>
-            <div>* 프레임 하단 문구 (25자 제한)</div>
-            <textarea
-              value={textareaText}
-              onChange={handleCongText}
-              placeholder="문구를 입력해주세요."
-            />
+          {type !== "white" && (
+            <div
+              className={classNames(
+                styles.congratulationText,
+                type === "blue" && styles.blueText
+              )}
+            >
+              {congratulationText.split("\n").map((line, idx) => (
+                <span key={idx}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={styles.editSaveEtc}>
+          {type !== "white" && (
+            <div className={styles.textAreaWrap}>
+              <div>* 프레임 하단 문구 (25자 제한)</div>
+              <textarea
+                value={textareaText}
+                onChange={handleCongText}
+                placeholder="문구를 입력해주세요."
+              />
+            </div>
+          )}
+          <div className={styles.buttonContainer}>
+            <button
+              type="button"
+              className={classNames(styles.downloadBtn, styles.etcButton)}
+              onClick={downloadImage}
+            >
+              다운로드
+            </button>
+            <button
+              type="button"
+              className={classNames(styles.replayBtn, styles.etcButton)}
+              onClick={goToSelect}
+            >
+              재촬영 하기
+            </button>
           </div>
-        )}
-        <div className={styles.buttonContainer}>
-          <button
-            type="button"
-            className={classNames(styles.downloadBtn, styles.etcButton)}
-            onClick={downloadImage}
-          >
-            다운로드
-          </button>
-          <button
-            type="button"
-            className={classNames(styles.replayBtn, styles.etcButton)}
-            onClick={goToSelect}
-          >
-            재촬영 하기
-          </button>
         </div>
       </div>
     </Container>
