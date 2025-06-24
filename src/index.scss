@@ -178,11 +178,17 @@ body {
   -moz-osx-font-smoothing: grayscale; /* Firefox */
   text-rendering: optimizeLegibility;
   transition: background-color 0.5s ease;
+  overflow-x: hidden;
 }
 html {
   background-color: #fff;
   color: #000;
   overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 html.dark {
   background-color: #000;

@@ -1,16 +1,33 @@
 .container {
   width: 100%;
+  min-height: 100dvh;
   max-width: 1024px;
   margin: 0 auto;
-}
-
-.homeContainer.container {
   .contents {
-    padding: 68px 0 0;
+    padding: 48px 20px 0;
+    min-height: calc(100dvh - 90px);
   }
   &.pc {
     .contents {
-      padding: 92px 0 0;
+      padding: 56px 20px 0;
+      min-height: calc(100dvh - 68px);
+    }
+  }
+  &.isWebCam {
+    padding: 0;
+    .contents {
+      padding: 0;
+      min-height: unset;
+    }
+  }
+  &.homeContainer {
+    .contents {
+      padding: 68px 0 0;
+    }
+    &.pc {
+      .contents {
+        padding: 92px 0 0;
+      }
     }
   }
 }

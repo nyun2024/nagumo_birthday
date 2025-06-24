@@ -5,7 +5,7 @@ import Header from "./Header";
 import useIsMobile from "@utils/useIsMobile";
 import useDarkMode from "@utils/useDarkMode";
 
-const Container = ({ children, isHome, isParallax, className }) => {
+const Container = ({ children, isHome, isParallax, isWebCam, className }) => {
   const isMobile = useIsMobile();
   const isDark = useDarkMode();
 
@@ -14,14 +14,15 @@ const Container = ({ children, isHome, isParallax, className }) => {
       className={classNames(
         styles.container,
         !isMobile && styles.pc,
+        isWebCam && styles.isWebCam,
         isDark && styles.dark,
         isHome && styles.homeContainer,
         className
       )}
     >
-      <Header mobile={isMobile} isParallax={isParallax} />
+      {!isWebCam && <Header mobile={isMobile} isParallax={isParallax} />}
       <div className={styles.contents}>{children}</div>
-      <Footer mobile={isMobile} />
+      {!isWebCam && <Footer mobile={isMobile} isHome={isHome} />}
     </div>
   );
 };

@@ -5,10 +5,12 @@ import styles from "./SelectFrame.module.scss";
 import useIsMobile from "@utils/useIsMobile";
 import Container from "@components/common/Container";
 import classNames from "classnames";
+import useDarkMode from "@utils/useDarkMode";
 
 const SelectFrame = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const isDark = useDarkMode();
 
   const goToWebCam = (type) => {
     navigate(`/webcam/${type}`);
@@ -24,6 +26,7 @@ const SelectFrame = () => {
     <Container
       className={classNames(
         isMobile ? styles.mobile : styles.pc,
+        isDark && styles.dark,
         styles.selectContainer
       )}
     >

@@ -3,14 +3,14 @@
 
 .filterBtn {
   height: 36px;
-  color: #fff;
-  border: 1px solid #fff;
-  padding: 0 14px;
-  border-radius: 17px;
-  font-size: 17px;
+  color: var(--font-color);
+  border: 1px solid var(--font-color);
+  padding: 0 14px 0 16px;
+  border-radius: 18px;
+  @include font-style($font-eng, 17px, 500, var(--font-color));
+  letter-spacing: -0.05px;
   margin-bottom: 10px;
   margin-right: 12px;
-  letter-spacing: 0.5px;
   &:last-child {
     margin-right: 0;
   }
@@ -21,9 +21,9 @@
   &.isHorMobileOnly {
     min-width: 85px;
     height: 32px;
-    padding: 0 12px;
+    padding: 0 12px 2px 12px;
     font-size: 15px;
-    margin-bottom: 11px;
+    margin-bottom: 10px;
     margin-right: 0;
     &:last-child {
       margin-bottom: 0;
@@ -33,10 +33,10 @@
     height: 32px;
     padding: 0 12px;
     font-size: 14px;
-    margin-right: 10px;
+    margin-right: 8px;
   }
   &.selected {
-    background-color: #fff;
-    color: $blue;
+    background-color: var(--font-color);
+    color: var(--bg-color);
   }
 }

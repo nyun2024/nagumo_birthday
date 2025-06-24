@@ -3,14 +3,14 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 278px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
+  height: 300px;
+  border: 1px solid var(--font-color);
+  border-radius: 5px;
   position: relative;
-  padding: 17px 16px 24px;
+  padding: 26px 16px 30px;
   .frameName {
-    font-size: 18px;
-    margin-bottom: 14px;
+    font-size: 16px;
+    margin-bottom: 20px;
   }
   .imgWrap {
     position: relative;
@@ -22,11 +22,11 @@
     }
     img {
       width: 100%;
-      max-width: 59px;
+      max-width: 64px;
     }
     &.white {
       img {
-        max-width: 130px;
+        max-width: 134px;
       }
     }
   }
@@ -40,22 +40,23 @@
     z-index: 5;
   }
   .zoomBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 5px;
     background-color: #fff;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 14px;
+    right: 14px;
     z-index: 10;
-    background-image: url(../../assets/img/icon_zoom.png);
+    background-image: url(../../assets/img/photoBooth/icon_zoom.png);
     background-size: 22px 22px;
     background-position: center;
     background-repeat: no-repeat;
+    border: 1px solid var(--font-color);
   }
 
   &.mobile {
-    width: calc(50% - 6px);
+    width: calc(50% - 7px);
   }
   &.pc {
     width: calc(33.33% - 7px);
@@ -72,20 +73,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 105;
+  z-index: 1000;
 }
 
 .dim {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 .frameLayer img {
   position: relative;
   max-width: 80%;
   max-height: 90%;
-  z-index: 101;
+  z-index: 1000;
   background-color: #afafaf;
 }

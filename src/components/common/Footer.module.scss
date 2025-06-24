@@ -2,18 +2,21 @@
 @use "../../assets/styles/variables.scss" as *;
 
 .footer {
-  width: 100vw;
-  padding: 20px 20px 30px 20px;
-  display: block;
-  background-color: var(--bg-color);
-  transform: translate(-50%);
-  position: relative;
-  left: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   .footerInner {
+    height: 90px;
     max-width: 1024px;
     width: 100%;
+    padding: 20px 20px 30px 20px;
+  }
+  &.isHome {
+    width: calc(100vw - 16px);
+    background-color: var(--bg-color);
+    transform: translate(-50%);
+    position: relative;
+    left: 50%;
   }
   p {
     margin-bottom: 2px;
@@ -27,6 +30,7 @@
 // pc
 .pc.footer {
   .footerInner {
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
