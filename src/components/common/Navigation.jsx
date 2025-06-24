@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./Navigation.module.scss"
+import styles from "./Navigation.module.scss";
 import useIsMobile from "@utils/useIsMobile";
 import classNames from "classnames";
 
@@ -12,17 +12,15 @@ const Navigation = () => {
           <span>01</span>
           <Link to={"/photoBooth"}>
             Nagumo 4cut
-            {/* <br /> */}
-            {isMobile ? <br /> : ' '}
+            {isMobile ? <br /> : " "}
             PhotoBooth
           </Link>
         </li>
         <li>
           <span>02</span>
-          <Link to={"/Message"}>
+          <Link to={"/message"}>
             HBD Message
-            {/* <br /> */}
-            {isMobile ? <br /> : ' '}
+            {isMobile ? <br /> : " "}
             To Nagumo
           </Link>
         </li>
