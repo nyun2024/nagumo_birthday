@@ -35,5 +35,5 @@ export default defineConfig({
       },
     ],
   },
-  base: "/nagumo_birthday/",
+  base: "./",
 });
