@@ -9,8 +9,10 @@ const HbdMessage = () => {
   const isMobile = useIsMobile();
 
   return (
-    <Container>
-      <div className={classNames(styles.hbdContainer, !isMobile && styles.pc)}>
+    <Container
+      className={classNames(styles.hbdContainer, !isMobile && styles.pc)}
+    >
+      <div className={styles.topMainContainer}>
         <h3 className={styles.hbdTitle}>
           Happy Birthday
           <br />
@@ -20,7 +22,7 @@ const HbdMessage = () => {
           <div className={styles.cautionList}>
             <div className={styles.desc}>
               나구모에게 생일 축하 메세지를
-              {isMobile && <br />}
+              {isMobile ? <br /> : " "}
               남겨주세요!
             </div>
             <ul>
@@ -46,7 +48,14 @@ const HbdMessage = () => {
           </div>
         </div>
       </div>
-      <Comments website-id={13439} page-id={1} />
+      <div className={styles.messageWrap}>
+        <div className={styles.loading}>
+          로딩 중이니 잠시만 기다려 주세요...
+        </div>
+        <div className={styles.message}>
+          <Comments website-id={13439} page-id={1} />
+        </div>
+      </div>
     </Container>
   );
 };

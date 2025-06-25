@@ -12,7 +12,7 @@
     padding: 20px 20px 30px 20px;
   }
   &.isHome {
-    width: calc(100vw - 16px);
+    width: 100vw;
     background-color: var(--bg-color);
     transform: translate(-50%);
     position: relative;

@@ -23,6 +23,7 @@ import useDarkMode from "@utils/useDarkMode";
 const HomeMain = ({ mobile, videoRef }) => {
   const isDark = useDarkMode();
   const [videoError, setVideoError] = useState(false);
+  const [isIOSTablet, setIsIOSTablet] = useState(false);
 
   const miniBoxs = [
     { src: mini01 },
@@ -34,14 +35,29 @@ const HomeMain = ({ mobile, videoRef }) => {
     },
   ];
 
+  // ios 테블릿에서는 webp 노출
+  useEffect(() => {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    const isIPad =
+      /iPad/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    setIsIOSTablet(isIPad);
+  }, []);
+
   return (
     <div
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
         <div className={styles.videoWrap}>
-          {videoError ? (
-            <img src={webp} alt="fallback animation" className={styles.mainVideo} />
+          {videoError || isIOSTablet ? (
+            <img
+              src={webp}
+              alt="fallback animation"
+              className={styles.mainVideo}
+            />
           ) : (
             <video
               ref={videoRef}

@@ -1,0 +1,32 @@
+@use "../../assets/styles/mixin.scss" as *;
+@use "../../assets/styles/variables.scss" as *;
+
+.refContainer {
+  padding: 50px 0 100px;
+  .title {
+    @include font-style($font-eng-home, 38px, 500, var(--font-color));
+    margin-bottom: 20px;
+  }
+  a {
+    @include font-style($font-basic, 14px, 400, var(--font-color));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  li + li {
+    margin-top: 12px;
+  }
+}
+
+// pc
+.pc.refContainer {
+  .title {
+    font-size: 50px;
+    margin-bottom: 32px;
+  }
+  a {
+    font-size: 16px;
+  }
+  li + li {
+    margin-top: 20px;
+  }
+}

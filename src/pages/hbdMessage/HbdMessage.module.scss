@@ -1,7 +1,7 @@
 @use "../../assets/styles/mixin.scss" as *;
 @use "../../assets/styles/variables.scss" as *;
 
-.hbdContainer {
+.topMainContainer {
   padding: 45px 0 70px;
   position: relative;
 }
@@ -55,10 +55,26 @@
     margin-top: 8px;
   }
 }
+.messageWrap {
+  position: relative;
+  min-height: 62px;
+}
+.loading {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  z-index: -1;
+  @include font-style($font-basic, 16px, 500, var(--font-color));
+}
+.message {
+  background-color: var(--bg-color);
+}
 
 // pc
 .hbdContainer.pc {
-  padding: 55px 0 90px;
+  .topMainContainer {
+    padding: 55px 0 90px;
+  }
   .hbdTitle {
     font-size: 107px;
     line-height: 105px;
@@ -99,5 +115,10 @@
     li + li {
       margin-top: 10px;
     }
+  }
+  .messageWrap {
+  }
+  .loading {
+    font-size: 18px;
   }
 }
