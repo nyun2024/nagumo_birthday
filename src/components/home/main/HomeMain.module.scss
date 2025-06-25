@@ -141,6 +141,10 @@
   .sectionVideo {
     flex-direction: column-reverse;
   }
+  .videoWrap {
+    height: 445px;
+    overflow: hidden;
+  }
   .mainTitle {
     align-items: center;
     flex-direction: column-reverse;
