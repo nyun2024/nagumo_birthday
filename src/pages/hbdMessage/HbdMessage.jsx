@@ -53,7 +53,7 @@ const HbdMessage = () => {
           로딩 중이니 잠시만 기다려 주세요...
         </div>
         <div className={styles.message}>
-          <Comments website-id={13439} page-id={1} sort="newest" />
+          <Comments website-id={13439} page-id={1} />
         </div>
       </div>
     </Container>
