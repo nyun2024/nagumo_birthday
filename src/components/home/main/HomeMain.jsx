@@ -22,8 +22,6 @@ import useDarkMode from "@utils/useDarkMode";
 
 const HomeMain = ({ mobile }) => {
   const isDark = useDarkMode();
-  // const [videoError, setVideoError] = useState(false);
-  // const [isIOSTablet, setIsIOSTablet] = useState(false);
 
   const miniBoxs = [
     { src: mini01 },
@@ -35,17 +33,6 @@ const HomeMain = ({ mobile }) => {
     },
   ];
 
-  // ios 테블릿에서는 webp 노출
-  // useEffect(() => {
-  //   const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-  //   const isIPad =
-  //     /iPad/.test(ua) ||
-  //     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-  //   setIsIOSTablet(isIPad);
-  // }, []);
-
   return (
     <div
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
@@ -56,27 +43,7 @@ const HomeMain = ({ mobile }) => {
             <source srcSet={webp} type="image/webp" />
             <img src={poster} alt="메인 비주얼" loading="eager" />
           </picture>
-          {/* {videoError || isIOSTablet ? (
-            <img
-              src={webp}
-              alt="fallback animation"
-              className={styles.mainVideo}
-            />
-          ) : (
-            <video
-              loop
-              muted
-              playsInline
-              autoPlay
-              preload="auto"
-              className={styles.mainVideo}
-              onError={() => setVideoError(true)}
-              poster={poster}
-            >
-              <source src={video} type="video/mp4" />
-            </video>
-          )} */}
-          
+          <img src={poster} className={styles.videoPoster} alt="메인 비주얼" loading="eager" />
         </div>
 
         <div className={styles.imgMiniBoxs}>
