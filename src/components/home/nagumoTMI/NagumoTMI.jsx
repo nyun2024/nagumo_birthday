@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react'
-import Dice from './Dice'
-import nagumo from '@img/home/nagumoTMI/rolling_dice_nagumo.png'
-import styles from './NagumoTMI.module.scss'
+import { useRef, useState } from "react";
+import Dice from "./Dice";
+import nagumo from "@img/home/nagumoTMI/rolling_dice_nagumo.jpg";
+import styles from "./NagumoTMI.module.scss";
 import useIsMobile from "@utils/useIsMobile";
-import classNames from 'classnames';
-import { Tmi } from './Tmi';
+import classNames from "classnames";
+import { Tmi } from "./Tmi";
 
 const NagumoTMI = () => {
   const diceRef = useRef();
@@ -15,16 +15,20 @@ const NagumoTMI = () => {
     diceRef.current?.roll();
 
     const randomIndex = Math.floor(Math.random() * Tmi.length);
-    setTimeout(()=> {
+    setTimeout(() => {
       setTmiMessage(Tmi[randomIndex]);
-    }, 1100)
+    }, 1100);
   };
 
   return (
-    <div className={classNames(styles.nagumoTMIContainer, !isMobile && styles.pc)}>
+    <div
+      className={classNames(styles.nagumoTMIContainer, !isMobile && styles.pc)}
+    >
       <div className={styles.title}>Nagumo's TMI</div>
-      <p className={styles.desc}>주사위를 굴리면 나구모의 TMI가 랜덤으로 나옵니다.</p>
-      
+      <p className={styles.desc}>
+        주사위를 굴리면 나구모의 TMI가 랜덤으로 나옵니다.
+      </p>
+
       <div className={styles.nagumoTMIBox}>
         <div className={styles.nagumoDiceWrap}>
           <img src={nagumo} className={styles.img} />
@@ -35,15 +39,19 @@ const NagumoTMI = () => {
             <p>나구모는요...</p>
             <p>{tmiMessage}</p>
           </div>
-          <button type='button' className={styles.rollingBtn} onClick={handleRoll}>
+          <button
+            type="button"
+            className={styles.rollingBtn}
+            onClick={handleRoll}
+          >
             주사위
-            {isMobile ? <br /> : ' '}
+            {isMobile ? <br /> : " "}
             굴리기!
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NagumoTMI
+export default NagumoTMI;
