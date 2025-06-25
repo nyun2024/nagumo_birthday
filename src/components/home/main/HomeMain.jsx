@@ -20,7 +20,7 @@ import pcTitle from "@img/home/main/main_pc_title.png";
 import longBox from "@img/home/main/main_longBox.jpg";
 import useDarkMode from "@utils/useDarkMode";
 
-const HomeMain = ({ mobile, videoRef }) => {
+const HomeMain = ({ mobile }) => {
   const isDark = useDarkMode();
   const [videoError, setVideoError] = useState(false);
   const [isIOSTablet, setIsIOSTablet] = useState(false);
@@ -60,7 +60,6 @@ const HomeMain = ({ mobile, videoRef }) => {
             />
           ) : (
             <video
-              ref={videoRef}
               loop
               muted
               playsInline
