@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import classNames from "classnames";
 import styles from "./Container.module.scss";
 import Footer from "./Footer";
@@ -8,6 +10,11 @@ import useDarkMode from "@utils/useDarkMode";
 const Container = ({ children, isHome, isParallax, isWebCam, className }) => {
   const isMobile = useIsMobile();
   const isDark = useDarkMode();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div

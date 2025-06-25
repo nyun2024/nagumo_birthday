@@ -33,6 +33,9 @@ const router = createHashRouter(
       element: <Reference />,
     },
   ],
+  {
+    scrollRestoration: "manual", // ★ 자동 스크롤 복원 끄기
+  },
   { basename: "/" }
 );
 
