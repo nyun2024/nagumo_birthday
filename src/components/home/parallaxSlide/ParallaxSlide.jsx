@@ -32,7 +32,7 @@ const ParallaxSlide = () => {
         } else {
           clearInterval(intervalRef.id);
         }
-      }, 50);
+      }, 70);
     }, 500);
 
     return () => {
