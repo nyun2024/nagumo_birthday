@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import video from "@assets/video/nagumo_video.mp4";
 import poster from "@assets/video/video_poster.jpg";
 import webp from "@assets/video/nagumo_video.webp";
 import styles from "./HomeMain.module.scss";
@@ -43,7 +41,12 @@ const HomeMain = ({ mobile }) => {
             <source srcSet={webp} type="image/webp" />
             <img src={poster} alt="메인 비주얼" loading="eager" />
           </picture>
-          <img src={poster} className={styles.videoPoster} alt="메인 비주얼" loading="eager" />
+          <img
+            src={poster}
+            className={styles.videoPoster}
+            alt="메인 비주얼"
+            loading="eager"
+          />
         </div>
 
         <div className={styles.imgMiniBoxs}>
