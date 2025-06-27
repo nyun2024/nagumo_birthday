@@ -22,6 +22,7 @@ const Home = () => {
 
   // WebCam 이미지 초기화
   useEffect(() => {
+    document.querySelector("html").classList.remove("parallax");
     localStorage.removeItem("filteredImages");
     localStorage.setItem("saveEdit", false);
   }, []);
