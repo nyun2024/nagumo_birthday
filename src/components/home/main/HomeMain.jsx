@@ -1,5 +1,3 @@
-import poster from "@assets/video/video_poster.jpg";
-import webp from "@assets/video/nagumo_video.webp";
 import styles from "./HomeMain.module.scss";
 import classNames from "classnames";
 import mini01 from "@img/home/main/main_sBox_01.jpg";
@@ -17,10 +15,43 @@ import nagumo from "@img/home/main/main_nagumo.png";
 import pcTitle from "@img/home/main/main_pc_title.png";
 import longBox from "@img/home/main/main_longBox.jpg";
 import useDarkMode from "@utils/useDarkMode";
+import { useRef, useState, useEffect } from "react";
+import VideoPlayer from "./VideoPlayer";
+import poster from "@assets/video/video_poster.jpg";
 
 const HomeMain = ({ mobile }) => {
   const isDark = useDarkMode();
+  const [showPopup, setShowPopup] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const [forcePlay, setForcePlay] = useState(false); // 재방문 자동재생 제어
+  const videoRef = useRef(null);
 
+  useEffect(() => {
+    const hasEntered = sessionStorage.getItem("hasEntered");
+
+    if (!hasEntered) {
+      setShowPopup(true); // 첫 진입
+    } else {
+      setEntered(true); // 재방문
+      setForcePlay(true); // 자동재생 시도
+    }
+  }, []);
+
+  const handleEnter = () => {
+    setShowPopup(false);
+    sessionStorage.setItem("hasEntered", "true");
+    setEntered(true);
+
+    // 사용자 클릭 기반 재생 시도
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = false; // 소리 있는 재생
+        videoRef.current.play().catch((err) => {
+          console.warn("입장 클릭 후 재생 실패:", err);
+        });
+      }
+    }, 100);
+  };
   const miniBoxs = [
     { src: mini01 },
     { src: mini02 },
@@ -32,23 +63,51 @@ const HomeMain = ({ mobile }) => {
   ];
 
   return (
+    <>
+      {/* 팝업 */}
+      {showPopup && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            color: "#fff",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <button
+            onClick={handleEnter}
+            style={{
+              padding: "12px 24px",
+              fontSize: 16,
+              borderRadius: 8,
+              cursor: "pointer",
+              color: "#fff"
+            }}
+          >
+            입장하기
+          </button>
+        </div>
+      )}
     <div
       className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
     >
       <div className={styles.sectionVideo}>
+        {/* 비디오 재생 */}
         <div className={styles.videoWrap}>
-          <picture className={styles.mainVideo}>
-            <source srcSet={webp} type="image/webp" />
-            <img src={poster} alt="메인 비주얼" loading="eager" />
-          </picture>
-          <img
-            src={poster}
-            className={styles.videoPoster}
-            alt="메인 비주얼"
-            loading="eager"
-          />
+          {entered && (
+            <VideoPlayer
+              ref={videoRef}
+              forcePlay={forcePlay} // 재방문 자동재생 시도
+              muted={true} // 자동재생 시 무조건 muted로
+            />
+          )}
+          <img src={poster} className={styles.videoPoster} alt="base img" />
         </div>
-
         <div className={styles.imgMiniBoxs}>
           {miniBoxs.map((item, num) => {
             return item.isNameJapen ? (
@@ -119,6 +178,7 @@ const HomeMain = ({ mobile }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
