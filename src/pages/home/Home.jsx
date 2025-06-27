@@ -22,31 +22,35 @@ const Home = () => {
 
   // WebCam 이미지 초기화
   useEffect(() => {
-    document.querySelector("html").classList.remove("parallax");
     localStorage.removeItem("filteredImages");
     localStorage.setItem("saveEdit", false);
   }, []);
 
   // 배경색 전환
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const isIntersecting =
+      rect.top < viewportCenter && rect.bottom > viewportCenter;
+
+    const hasScrolled = window.scrollY > 10; // 10px 정도는 허용 범위로 봄
+
+    if (isIntersecting && !isNavVisible && hasScrolled) {
+      document.querySelector("html").classList.add("parallax");
+      setIsParallax(true);
+    } else {
+      document.querySelector("html").classList.remove("parallax");
+      setIsParallax(false);
+    }
+  };
   useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 2;
-      const isIntersecting =
-        rect.top < viewportCenter && rect.bottom > viewportCenter;
+    requestAnimationFrame(() => {
+      handleScroll(); // 첫 렌더 직후 레이아웃 안정화 이후 실행
+    });
 
-      if (isIntersecting && !isNavVisible) {
-        document.querySelector("html").classList.add("parallax");
-        setIsParallax(true);
-      } else {
-        document.querySelector("html").classList.remove("parallax");
-        setIsParallax(false);
-      }
-    };
-
-    handleScroll();
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
 
