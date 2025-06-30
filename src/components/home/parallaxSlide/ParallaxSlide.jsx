@@ -37,7 +37,7 @@ const ParallaxSlide = () => {
 
     return () => {
       clearTimeout(timeoutId);
-      clearInterval(intervalRef.id); // ✅ 이전 타이핑 중단
+      clearInterval(intervalRef.id); // 이전 타이핑 중단
     };
   }, [currentIndex]);
 

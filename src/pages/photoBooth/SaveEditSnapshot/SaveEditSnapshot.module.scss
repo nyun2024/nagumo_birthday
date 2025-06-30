@@ -103,6 +103,49 @@
         gap: 27px;
       }
     }
+    // mob 세기의 킬러전 프레임
+    &.killerExhibition {
+      .resultFrameWrap {
+        height: 465px;
+      }
+      .capturedImgWrap {
+        padding: 24px 15px 24px 14px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px 10px;
+        img:nth-child(1) {
+          width: 177px;
+          position: relative;
+          z-index: 1;
+        }
+        img:nth-child(2) {
+          width: 94px;
+          height: 126px;
+        }
+        img:nth-child(3) {
+          width: 121px;
+          height: 162px;
+        }
+        img:nth-child(4) {
+          position: absolute;
+          bottom: 106px;
+          right: 15px;
+          width: 151px;
+          height: 200px;
+          z-index: 1;
+        }
+      }
+    }
+    // mob 티켓 프레임
+    &.ticket {
+      .resultFrameWrap {
+        height: 465px;
+      }
+      .capturedImgWrap {
+        padding: 66px 167px 19px 14px;
+        gap: 7px;
+      }
+    }
     .congratulationText {
       height: 157px;
       padding: 26px 29px 26px;
@@ -164,6 +207,50 @@
     .capturedImgWrap {
       padding: 42px 29px 0 29px;
       gap: 28px;
+    }
+    // PC 세기의 킬러전 프레임
+    &.killerExhibition {
+      .resultFrameWrap {
+        width: 370px;
+        height: 555px;
+      }
+      .capturedImgWrap {
+        padding: 29px 17px 30px 17px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 22px 11px;
+        img:nth-child(1) {
+          width: 211px;
+          height: 281px;
+        }
+        img:nth-child(2) {
+          width: 114px;
+          height: 149px;
+        }
+        img:nth-child(3) {
+          width: 145px;
+          height: 193px;
+        }
+        img:nth-child(4) {
+          position: absolute;
+          bottom: 127px;
+          right: 17px;
+          width: 179px;
+          height: 237px;
+          z-index: 1;
+        }
+      }
+    }
+    // mob 티켓 프레임
+    &.ticket {
+      .resultFrameWrap {
+        width: 370px;
+        height: 555px;
+      }
+      .capturedImgWrap {
+        padding: 79px 199px 23px 18px;
+        gap: 9px;
+      }
     }
     .congratulationText {
       height: 185px;

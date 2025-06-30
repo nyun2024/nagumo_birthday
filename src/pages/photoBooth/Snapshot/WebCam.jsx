@@ -72,8 +72,8 @@ const WebCam = () => {
 
     const isMobile = /iphone|ipod|android.*mobile|windows phone/.test(ua);
 
-    setisHorMobileOnly(isMobile && !isTablet && type !== "white");
-    setisVerMobileOnly(isMobile && !isTablet && type === "white");
+    setisHorMobileOnly(isMobile && !isTablet && type !== "killerExhibition");
+    setisVerMobileOnly(isMobile && !isTablet && type === "killerExhibition");
   }, []);
 
   useEffect(() => {
@@ -243,7 +243,7 @@ const WebCam = () => {
         </div>
         <div
           className={classNames(
-            type === "white"
+            type === "killerExhibition"
               ? styles.verticalCameraWebCamWrap
               : styles.horizontalCameraWebCamWrap,
             styles.cameraWebCamWrap
@@ -251,7 +251,7 @@ const WebCam = () => {
         >
           <div className={styles.cameraWebCam}>
             <img
-              src={type === "white" ? cameraVertical : camera}
+              src={type === "killerExhibition" ? cameraVertical : camera}
               className={styles.cameraImg}
             />
             <button
@@ -263,7 +263,7 @@ const WebCam = () => {
               <span className={isBlinking && [styles.blink]}>Click</span>
             </button>
             <div className={styles.webCamFrame} ref={containerRef}>
-              {type === "blue" &&
+              {(type === "order" || type === "holydays") &&
                 images.length < MAX_PHOTOS &&
                 frames?.[images.length] && (
                   <img

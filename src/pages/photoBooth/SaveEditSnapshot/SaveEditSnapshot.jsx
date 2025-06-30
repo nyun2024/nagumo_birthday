@@ -49,7 +49,7 @@ const SaveEditSnapshot = () => {
   }, []);
 
   const goToSelect = () => {
-    navigate("/select");
+    navigate("/photoBooth");
   };
 
   const handleCongText = (e) => {
@@ -96,7 +96,7 @@ const SaveEditSnapshot = () => {
       } else {
         const link = document.createElement("a");
         link.href = dataURL;
-        link.download = "shin-snapshot.png";
+        link.download = "nagumo_photobooth.png";
         link.click();
       }
     } catch (err) {
@@ -109,8 +109,9 @@ const SaveEditSnapshot = () => {
       className={classNames(
         styles.EditSaveContainer,
         isMobile ? styles.mobile : styles.pc,
-        isHorMobileOnly && styles.isHorMobileOnly,
-        type === "white" && styles.white
+        isHorMobileOnly && type !== "ticket" && styles.isHorMobileOnly,
+        type === "killerExhibition" && styles.killerExhibition,
+        type === "ticket" && styles.ticket
       )}
     >
       <div className={styles.saveEditInner}>
@@ -126,13 +127,8 @@ const SaveEditSnapshot = () => {
               />
             ))}
           </div>
-          {type !== "white" && (
-            <div
-              className={classNames(
-                styles.congratulationText,
-                type === "blue" && styles.blueText
-              )}
-            >
+          {type !== "killerExhibition" && type !== "ticket" && (
+            <div className={classNames(styles.congratulationText)}>
               {congratulationText.split("\n").map((line, idx) => (
                 <span key={idx}>
                   {line}
@@ -143,7 +139,7 @@ const SaveEditSnapshot = () => {
           )}
         </div>
         <div className={styles.editSaveEtc}>
-          {type !== "white" && (
+          {type !== "killerExhibition" && type !== "ticket" && (
             <div className={styles.textAreaWrap}>
               <div>* 프레임 하단 문구 (25자 제한)</div>
               <textarea

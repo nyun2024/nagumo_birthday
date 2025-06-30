@@ -1,18 +1,26 @@
-import blue1 from "@img/photoBooth/frame/blue/blue1.png";
-import blue2 from "@img/photoBooth/frame/blue/blue2.png";
-import blue3 from "@img/photoBooth/frame/blue/blue3.png";
-import blue4 from "@img/photoBooth/frame/blue/blue4.png";
+import orderCut1 from "@img/photoBooth/frame/order/order_nagumo_cut1.png";
+import orderCut2 from "@img/photoBooth/frame/order/order_nagumo_cut2.png";
+import orderCut3 from "@img/photoBooth/frame/order/order_nagumo_cut3.png";
+import orderCut4 from "@img/photoBooth/frame/order/order_nagumo_cut4.png";
 
-import blackFrame from "@img/photoBooth/frame/black/black_frame.png";
-import blueFrame from "@img/photoBooth/frame/blue/blue_frame.png";
-import whiteFrame from "@img/photoBooth/frame/white/white_frame.png";
+import holydaysCut1 from "@img/photoBooth/frame/holydays/holydays_nagumo_cut1.png";
+import holydaysCut2 from "@img/photoBooth/frame/holydays/holydays_nagumo_cut2.png";
+import holydaysCut3 from "@img/photoBooth/frame/holydays/holydays_nagumo_cut3.png";
+import holydaysCut4 from "@img/photoBooth/frame/holydays/holydays_nagumo_cut4.png";
+
+import orderFrame from "@img/photoBooth/frame/order/order_nagumo_frame.png";
+import holydaysFrame from "@img/photoBooth/frame/holydays/holydays_nagumo_frame.png";
+import killerExhibitionFrame from "@img/photoBooth/frame/killerExhibition/killerExhibition_frame.png";
+import ticketFrame from "@img/photoBooth/frame/ticketType/ticket_frame.png";
 
 export const frameImages = {
-  blue: [blue1, blue2, blue3, blue4],
+  order: [orderCut1, orderCut2, orderCut3, orderCut4],
+  holydays: [holydaysCut1, holydaysCut2, holydaysCut3, holydaysCut4],
 };
 
 export const resultFrame = {
-  black: blackFrame,
-  blue: blueFrame,
-  white: whiteFrame,
+  order: orderFrame,
+  holydays: holydaysFrame,
+  killerExhibition: killerExhibitionFrame,
+  ticket: ticketFrame,
 };

@@ -1,15 +1,23 @@
 import { useState, useEffect } from "react";
-import black from "@img/photoBooth/frame/black/black_frame.png";
-import blue from "@img/photoBooth/frame/blue/blue_frame.png";
-import white from "@img/photoBooth/frame/white/white_frame.png";
+import order from "@img/photoBooth/frame/order/order_nagumo_frame.png";
+import holydays from "@img/photoBooth/frame/holydays/holydays_nagumo_frame.png";
+import killerExhibition from "@img/photoBooth/frame/killerExhibition/killerExhibition_frame.png";
+import ticket from "@img/photoBooth/frame/ticketType/ticket_frame.png";
 import useIsMobile from "@utils/useIsMobile";
 import styles from "./FrameTypeButton.module.scss";
 import classNames from "classnames";
 
 const imgs = {
-  black,
-  blue,
-  white,
+  order,
+  holydays,
+  killerExhibition,
+  ticket,
+};
+const titles = {
+  order: "OREDR",
+  holydays: "Holydays",
+  killerExhibition: "세기의 킬러전",
+  ticket: "Ticket",
 };
 
 const FrameTypeButton = ({ type, onClick }) => {
@@ -23,11 +31,6 @@ const FrameTypeButton = ({ type, onClick }) => {
 
   const handleCloseClick = () => {
     setIsOpen(false);
-  };
-
-  const capitalizeFirstLetter = (str) => {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
   useEffect(() => {
@@ -50,11 +53,11 @@ const FrameTypeButton = ({ type, onClick }) => {
           styles.frameTypeButton
         )}
       >
-        <div className={styles.frameName}>{capitalizeFirstLetter(type)}</div>
+        <div className={styles.frameName}>{titles[type]}</div>
         <div
           className={classNames(
             styles.imgWrap,
-            type === "white" && styles.white
+            (type === "killerExhibition" || type === "ticket") && styles.lgFrame
           )}
         >
           {imgSrc && <img src={imgSrc} alt={`${type} icon`} />}
