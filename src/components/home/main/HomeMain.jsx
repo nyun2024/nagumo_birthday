@@ -18,6 +18,7 @@ import pcTitle from "@img/home/main/main_pc_title.png";
 import longBox from "@img/home/main/main_longBox.jpg";
 import useDarkMode from "@utils/useDarkMode";
 import { useState, useEffect } from "react";
+import NotRobot from "../notRobot/NotRobot";
 
 const HomeMain = ({ mobile }) => {
   const isDark = useDarkMode();
@@ -52,49 +53,48 @@ const HomeMain = ({ mobile }) => {
     },
   ];
 
+  useEffect(() => {
+    if (!showPopup) return;
+
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.overflow = "hidden";
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.overflow = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [showPopup]);
+
   return (
     <>
       {/* 팝업 */}
-      {showPopup && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
-            color: "#fff",
-            zIndex: 9999,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <button
-            onClick={handleEnter}
-            style={{
-              padding: "12px 24px",
-              fontSize: 16,
-              borderRadius: 8,
-              cursor: "pointer",
-              color: "#fff"
-            }}
-          >
-            입장하기
-          </button>
-        </div>
-      )}
+      {showPopup && <NotRobot handleEnter={handleEnter} />}
       <div
-        className={classNames(styles.homeMainContainer, mobile ? "" : styles.pc)}
+        className={classNames(
+          styles.homeMainContainer,
+          mobile ? "" : styles.pc
+        )}
       >
         <div className={styles.sectionVideo}>
           <div className={styles.videoWrap}>
-            {
-              entered || forcePlay ?
+            {entered || forcePlay ? (
               <picture className={styles.mainVideo}>
                 <source srcSet={webp} type="image/webp" />
                 <img src={poster} alt="메인 비주얼" loading="eager" />
-              </picture> : ''
-            }
+              </picture>
+            ) : (
+              ""
+            )}
             <img
               src={poster}
               className={styles.videoPoster}

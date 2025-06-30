@@ -48,7 +48,7 @@ const Home = () => {
   };
   useEffect(() => {
     requestAnimationFrame(() => {
-      handleScroll(); // 첫 렌더 직후 레이아웃 안정화 이후 실행
+      handleScroll();
     });
 
     window.addEventListener("scroll", handleScroll);
