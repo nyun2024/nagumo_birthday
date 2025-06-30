@@ -23,6 +23,7 @@ import NotRobot from "../notRobot/NotRobot";
 const HomeMain = ({ mobile }) => {
   const isDark = useDarkMode();
   const [showPopup, setShowPopup] = useState(false);
+  const [closePop, setClosePop] = useState(false);
   const [entered, setEntered] = useState(false);
   const [forcePlay, setForcePlay] = useState(false); // 재방문 자동재생 제어
 
@@ -38,9 +39,12 @@ const HomeMain = ({ mobile }) => {
   }, []);
 
   const handleEnter = () => {
-    setShowPopup(false);
-    sessionStorage.setItem("hasEntered", "true");
-    setEntered(true);
+    setClosePop(true);
+    setTimeout(() => {
+      setShowPopup(false);
+      sessionStorage.setItem("hasEntered", "true");
+      setEntered(true);
+    }, 200);
   };
 
   const miniBoxs = [
@@ -78,7 +82,7 @@ const HomeMain = ({ mobile }) => {
   return (
     <>
       {/* 팝업 */}
-      {showPopup && <NotRobot handleEnter={handleEnter} />}
+      {showPopup && <NotRobot handleEnter={handleEnter} closePop={closePop} />}
       <div
         className={classNames(
           styles.homeMainContainer,

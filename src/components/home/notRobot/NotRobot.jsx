@@ -9,6 +9,7 @@ import boxImg6 from "@img/home/parallaxSlide/sec03/section03_6.jpg";
 import boxImg7 from "@img/home/parallaxSlide/sec02/section02_3.jpg";
 import boxImg8 from "@img/home/parallaxSlide/sec02/section02_4.jpg";
 import boxImg9 from "@img/home/parallaxSlide/sec02/section02_5.jpg";
+import classNames from "classnames";
 
 const boxImgs = [
   boxImg1,
@@ -22,7 +23,7 @@ const boxImgs = [
   boxImg9,
 ];
 
-const NotRobot = ({ handleEnter }) => {
+const NotRobot = ({ handleEnter, closePop }) => {
   const itemCount = 9;
 
   const [checks, setChecks] = useState(
@@ -42,7 +43,9 @@ const NotRobot = ({ handleEnter }) => {
   };
 
   return (
-    <div className={styles.notRobotPopup}>
+    <div
+      className={classNames(styles.notRobotPopup, closePop && styles.fadeOut)}
+    >
       <div className={styles.notRobotContainer}>
         <div className={styles.notRobot}>
           <div className={styles.topArea}>

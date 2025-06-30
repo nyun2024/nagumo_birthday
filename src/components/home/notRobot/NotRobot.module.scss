@@ -7,6 +7,9 @@
   overflow-y: auto;
   inset: 0;
   background-color: #000;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
 }
 
 .notRobotContainer {
@@ -105,5 +108,19 @@
   &:disabled {
     background-color: #9d9d9d;
     color: #fff;
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+}
+@keyframes fadeOut {
+  from {
+    // opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    // opacity: 0;
+    transform: translateY(100vh); // 완전히 아래로 사라짐
   }
 }
