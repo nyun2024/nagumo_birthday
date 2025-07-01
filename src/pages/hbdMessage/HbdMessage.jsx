@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Container from "@components/common/Container";
 import { Comments } from "@hyvor/hyvor-talk-react";
 import hbdNagumo from "@img/hbdMessage/hbd_nagumo.png";
@@ -7,6 +8,12 @@ import classNames from "classnames";
 
 const HbdMessage = () => {
   const isMobile = useIsMobile();
+
+  // WebCam 이미지 초기화
+  useEffect(() => {
+    localStorage.removeItem("filteredImages");
+    localStorage.setItem("saveEdit", false);
+  }, []);
 
   return (
     <Container

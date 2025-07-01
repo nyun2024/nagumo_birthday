@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Container from "@components/common/Container";
 import classNames from "classnames";
 import styles from "./Reference.module.scss";
@@ -5,6 +6,12 @@ import useIsMobile from "@utils/useIsMobile";
 
 const Reference = () => {
   const isMobile = useIsMobile();
+
+  // WebCam 이미지 초기화
+  useEffect(() => {
+    localStorage.removeItem("filteredImages");
+    localStorage.setItem("saveEdit", false);
+  }, []);
 
   return (
     <Container>

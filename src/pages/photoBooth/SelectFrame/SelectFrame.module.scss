@@ -1,6 +1,7 @@
 .selectContainer {
   .title {
     text-align: center;
+    letter-spacing: -0.5px;
   }
   .frameContainer {
     display: flex;
@@ -21,7 +22,7 @@
       padding-bottom: 80px;
     }
     .title {
-      font-size: 20px;
+      font-size: 18px;
       padding: 39px 0 34px;
     }
   }
@@ -31,7 +32,7 @@
       padding-bottom: 110px;
     }
     .title {
-      font-size: 22px;
+      font-size: 20px;
       padding: 42px 0 48px;
     }
   }
