@@ -109,7 +109,7 @@ const SaveEditSnapshot = () => {
       className={classNames(
         styles.EditSaveContainer,
         isMobile ? styles.mobile : styles.pc,
-        isHorMobileOnly && type !== "ticket" && styles.isHorMobileOnly,
+        isHorMobileOnly && styles.isHorMobileOnly,
         type === "killerExhibition" && styles.killerExhibition,
         type === "ticket" && styles.ticket
       )}
