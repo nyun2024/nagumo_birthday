@@ -109,6 +109,7 @@
         height: 465px;
       }
       .capturedImgWrap {
+        height: 465px;
         padding: 24px 15px 24px 14px;
         flex-direction: row;
         flex-wrap: wrap;
@@ -137,13 +138,17 @@
       }
     }
     // mob 티켓 프레임
-    &.ticket {
+    &.isHorMobileOnly.ticket {
       .resultFrameWrap {
+        width: 310px;
         height: 465px;
       }
       .capturedImgWrap {
         padding: 66px 167px 19px 14px;
         gap: 7px;
+        img {
+          height: 90px;
+        }
       }
     }
     .congratulationText {
@@ -242,7 +247,7 @@
       }
     }
     // mob 티켓 프레임
-    &.ticket {
+    &.isHorMobileOnly.ticket {
       .resultFrameWrap {
         width: 370px;
         height: 555px;
