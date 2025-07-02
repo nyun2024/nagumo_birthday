@@ -128,7 +128,12 @@ const SaveEditSnapshot = () => {
             ))}
           </div>
           {type !== "killerExhibition" && type !== "ticket" && (
-            <div className={classNames(styles.congratulationText)}>
+            <div
+              className={classNames(
+                styles.congratulationText,
+                type === "order" && styles.orderText
+              )}
+            >
               {congratulationText.split("\n").map((line, idx) => (
                 <span key={idx}>
                   {line}

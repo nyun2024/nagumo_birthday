@@ -39,6 +39,11 @@
     justify-content: center;
     white-space: pre-line;
     text-align: center;
+    &.orderText {
+      span {
+        color: #d20000 !important;
+      }
+    }
   }
   .textAreaWrap {
     div {
@@ -158,10 +163,6 @@
         @include font-style($font-hand, 36px, 400, #fff);
         line-height: 42px;
       }
-      &.blueText {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
     }
     .textAreaWrap {
       div {
@@ -262,10 +263,6 @@
       @include font-style($font-hand, 41px, 400, #fff);
       line-height: 46px;
       padding: 33px 29px 30px;
-      &.blueText {
-        padding-top: 35px;
-        padding-bottom: 49px;
-      }
     }
     .buttonContainer {
       gap: 12px;

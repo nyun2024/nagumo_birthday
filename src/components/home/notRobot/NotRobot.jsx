@@ -27,7 +27,7 @@ const NotRobot = ({ handleEnter, closePop }) => {
   const itemCount = 9;
 
   const [checks, setChecks] = useState(
-    Array.from({ length: itemCount }, (_, i) => false)
+    Array.from({ length: itemCount }, () => false)
   );
 
   const handleChange = (index) => (e) => {
