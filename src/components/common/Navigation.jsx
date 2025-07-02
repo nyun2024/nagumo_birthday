@@ -26,6 +26,10 @@ const Navigation = () => {
         </li>
         <li>
           <span>03</span>
+          <Link to={"/etc"}>Other Sites</Link>
+        </li>
+        <li>
+          <span>04</span>
           <Link to={"/reference"}>Reference</Link>
         </li>
       </ul>

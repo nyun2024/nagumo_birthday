@@ -5,6 +5,7 @@ import WebCam from "@pages/photoBooth/Snapshot/WebCam";
 import SaveEditSnapshot from "@pages/photoBooth/SaveEditSnapshot/SaveEditSnapshot";
 import HbdMessage from "@pages/hbdMessage/HbdMessage";
 import Reference from "@pages/reference/Reference";
+import Etc from "@pages/etc/Etc";
 
 const router = createHashRouter(
   [
@@ -27,6 +28,10 @@ const router = createHashRouter(
     {
       path: "/message",
       element: <HbdMessage />,
+    },
+    {
+      path: "/etc",
+      element: <Etc />,
     },
     {
       path: "/reference",
