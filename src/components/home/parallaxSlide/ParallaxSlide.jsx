@@ -8,12 +8,56 @@ const ParallaxSlide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const smallImgRefs = useRef({});
+  const slideWrapperRef = useRef(null);
+  const autoSlideStartedRef = useRef(false);
+  const timeoutRef = useRef(null);
   const slideKeys = Object.keys(SlideImages);
   const totalSlides = slideKeys.length;
-  const keys = Object.keys(SlideImages);
   const isMobile = useIsMobile();
 
-  // 슬라이드 넘어갈때 text 타이핑 효과
+  // 자동 슬라이드 예약 함수
+  const scheduleNextSlide = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    }, 5000);
+  };
+
+  // 자동 슬라이드 타이머 재설정
+  useEffect(() => {
+    if (autoSlideStartedRef.current) {
+      scheduleNextSlide();
+    }
+  }, [currentIndex]);
+
+  // 자동 슬라이드
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isAtTop =
+          entry.isIntersecting && entry.boundingClientRect.top <= 1;
+
+        if (isAtTop && !autoSlideStartedRef.current) {
+          autoSlideStartedRef.current = true;
+          scheduleNextSlide();
+        }
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px -99% 0px",
+      }
+    );
+
+    const wrapper = slideWrapperRef.current;
+    if (wrapper) observer.observe(wrapper);
+
+    return () => {
+      if (wrapper) observer.unobserve(wrapper);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  // 텍스트 타이핑 효과
   useEffect(() => {
     const fullText = isMobile
       ? SlideImages[slideKeys[currentIndex]].text
@@ -37,19 +81,20 @@ const ParallaxSlide = () => {
 
     return () => {
       clearTimeout(timeoutId);
-      clearInterval(intervalRef.id); // 이전 타이핑 중단
+      clearInterval(intervalRef.id);
     };
   }, [currentIndex]);
 
   // 슬라이드 prev, next
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + keys.length) % keys.length);
-  };
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % keys.length);
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  // smallImg 패럴럭스 효과
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+  };
+
+  // mall 이미지 패럴럭스
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop =
@@ -78,6 +123,7 @@ const ParallaxSlide = () => {
 
   return (
     <div
+      ref={slideWrapperRef}
       className={classNames(
         styles.parallaxSlideWrapper,
         !isMobile && styles.pc
@@ -108,7 +154,7 @@ const ParallaxSlide = () => {
               ref={(el) => {
                 if (el) smallImgRefs.current[`${key}-${i}`] = el;
               }}
-              data-speed={(i + 1) * 0.05}
+              data-speed={(i + 1) * 0.035}
             >
               <img src={smallItem} alt="small img" />
             </div>
