@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styles from "./NotRobot.module.scss";
-import boxImg1 from "@img/home/parallaxSlide/sec03/section03_1.jpg";
-import boxImg2 from "@img/home/parallaxSlide/sec03/section03_2.jpg";
-import boxImg3 from "@img/home/parallaxSlide/sec03/section03_3.jpg";
-import boxImg4 from "@img/home/parallaxSlide/sec03/section03_4.jpg";
-import boxImg5 from "@img/home/parallaxSlide/sec03/section03_5.jpg";
-import boxImg6 from "@img/home/parallaxSlide/sec03/section03_6.jpg";
-import boxImg7 from "@img/home/parallaxSlide/sec02/section02_3.jpg";
-import boxImg8 from "@img/home/parallaxSlide/sec02/section02_4.jpg";
-import boxImg9 from "@img/home/parallaxSlide/sec02/section02_5.jpg";
+import boxImg1 from "@img/home/notRobot/notRobot01.jpg";
+import boxImg2 from "@img/home/notRobot/notRobot02.jpg";
+import boxImg3 from "@img/home/notRobot/notRobot03.jpg";
+import boxImg4 from "@img/home/notRobot/notRobot04.jpg";
+import boxImg5 from "@img/home/notRobot/notRobot05.jpg";
+import boxImg6 from "@img/home/notRobot/notRobot06.jpg";
+import boxImg7 from "@img/home/notRobot/notRobot07.jpg";
+import boxImg8 from "@img/home/notRobot/notRobot08.jpg";
+import boxImg9 from "@img/home/notRobot/notRobot09.jpg";
 import classNames from "classnames";
 
 const boxImgs = [

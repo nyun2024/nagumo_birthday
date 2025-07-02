@@ -12,7 +12,7 @@ const Footer = ({ mobile, isHome, isWebCam }) => {
       )}
     >
       <div className={styles.footerInner}>
-        <p>Copyright 2021. kws04394 All rights reserved.</p>
+        <p>Copyright 2025. kws04394 All rights reserved.</p>
         <a
           href="https://x.com/kws04394?s=21&t=stsc6fZOdwcWZCW8N_3nwA"
           target="_blank"

@@ -27,12 +27,18 @@ const Reference = () => {
             </a>
           </li>
           <li>
-            <a href="https://youtu.be/XFJ7XNPzmaM?si=X934ie-gMOhjtGEb">
+            <a
+              href="https://youtu.be/XFJ7XNPzmaM?si=X934ie-gMOhjtGEb"
+              target="_blank"
+            >
               【公式】『SAKAMOTO DAYS』1周年&5巻発売記念PV
             </a>
           </li>
           <li>
-            <a href="https://youtu.be/1Fp_68qdz_w?si=qkn6-HkMI8XJbhp6">
+            <a
+              href="https://youtu.be/1Fp_68qdz_w?si=qkn6-HkMI8XJbhp6"
+              target="_blank"
+            >
               JUMP MV /『SAKAMOTO DAYS』×『走れSAKAMOTO』| Vaundy
             </a>
           </li>
