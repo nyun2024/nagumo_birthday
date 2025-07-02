@@ -38,15 +38,15 @@ const ParallaxSlide = () => {
       const scrollTop = window.scrollY || window.pageYOffset;
       const wrapperTop = slideWrapperRef.current.offsetTop;
 
-      const offset = 20;
-      if (Math.abs(scrollTop - wrapperTop) < offset) {
+      const Offset = 200;
+      if (scrollTop >= wrapperTop - Offset) {
         autoSlideStartedRef.current = true;
         scheduleNextSlide();
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    handleScroll(); // mount 직후에도 체크
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
