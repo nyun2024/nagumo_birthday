@@ -50,6 +50,7 @@
   flex-wrap: wrap;
   gap: 4px;
   padding: 4px;
+  overflow: hidden;
   .checkBox {
     display: block;
     width: calc((100vw - 80px) / 3);
@@ -74,9 +75,12 @@
       content: "";
       display: block;
       position: absolute;
-      width: 100%;
-      height: 100%;
-      border: 5px solid #000;
+      width: 107%;
+      height: 107%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 9px solid #000;
       box-sizing: border-box;
       opacity: 0;
     }
@@ -91,8 +95,8 @@
     &::after {
       content: "";
       display: none;
-      width: 24px;
-      height: 24px;
+      width: 23px;
+      height: 23px;
       background-image: url(../../../assets/img/common/icon_checkbox.png);
       background-size: cover;
       position: absolute;
@@ -125,11 +129,9 @@
 }
 @keyframes fadeOut {
   from {
-    // opacity: 1;
     transform: translateY(0);
   }
   to {
-    // opacity: 0;
-    transform: translateY(100vh); // 완전히 아래로 사라짐
+    transform: translateY(100vh);
   }
 }
