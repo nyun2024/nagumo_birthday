@@ -32,27 +32,24 @@ const ParallaxSlide = () => {
 
   // 자동 슬라이드
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isAtTop =
-          entry.isIntersecting && entry.boundingClientRect.top <= 1;
+    const handleScroll = () => {
+      if (autoSlideStartedRef.current || !slideWrapperRef.current) return;
 
-        if (isAtTop && !autoSlideStartedRef.current) {
-          autoSlideStartedRef.current = true;
-          scheduleNextSlide();
-        }
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px -99% 0px",
+      const scrollTop = window.scrollY || window.pageYOffset;
+      const wrapperTop = slideWrapperRef.current.offsetTop;
+
+      const offset = 20;
+      if (Math.abs(scrollTop - wrapperTop) < offset) {
+        autoSlideStartedRef.current = true;
+        scheduleNextSlide();
       }
-    );
+    };
 
-    const wrapper = slideWrapperRef.current;
-    if (wrapper) observer.observe(wrapper);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
 
     return () => {
-      if (wrapper) observer.unobserve(wrapper);
+      window.removeEventListener("scroll", handleScroll);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
