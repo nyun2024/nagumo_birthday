@@ -14,9 +14,17 @@ const NagumoTMI = () => {
   const handleRoll = () => {
     diceRef.current?.roll();
 
-    const randomIndex = Math.floor(Math.random() * Tmi.length);
+    let newIndex = Math.floor(Math.random() * Tmi.length);
+
+    // 직전 tmi랑 안겹치게
+    if (Tmi.length > 1) {
+      while (Tmi[newIndex] === tmiMessage) {
+        newIndex = Math.floor(Math.random() * Tmi.length);
+      }
+    }
+
     setTimeout(() => {
-      setTmiMessage(Tmi[randomIndex]);
+      setTmiMessage(Tmi[newIndex]);
     }, 1100);
   };
 
