@@ -92,7 +92,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding: 40px 0 80px;
+      padding: 40px 0 90px;
     }
     .resultFrameWrap {
       width: 310px;
@@ -156,6 +156,19 @@
         }
       }
     }
+    &.ticket {
+      .resultFrameWrap {
+        width: 310px;
+        height: 465px;
+      }
+      .capturedImgWrap {
+        padding: 66px 167px 19px 14px;
+        gap: 7px;
+        img {
+          height: 90px;
+        }
+      }
+    }
     .congratulationText {
       height: 157px;
       padding: 26px 29px 26px;
@@ -174,7 +187,7 @@
       .etcButton {
         height: 44px;
         font-size: 16px;
-        margin: 28px auto 0;
+        margin: 43px auto 0;
         padding-bottom: 3px;
       }
     }
@@ -247,8 +260,8 @@
         }
       }
     }
-    // mob 티켓 프레임
-    &.isHorMobileOnly.ticket {
+    // pc 티켓 프레임
+    &.ticket {
       .resultFrameWrap {
         width: 370px;
         height: 555px;

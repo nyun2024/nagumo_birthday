@@ -20,7 +20,7 @@ const ParallaxSlide = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides);
-    }, 5000);
+    }, 3800);
   };
 
   // 자동 슬라이드 타이머 재설정
@@ -38,7 +38,7 @@ const ParallaxSlide = () => {
       const scrollTop = window.scrollY || window.pageYOffset;
       const wrapperTop = slideWrapperRef.current.offsetTop;
 
-      const Offset = 200;
+      const Offset = 300;
       if (scrollTop >= wrapperTop - Offset) {
         autoSlideStartedRef.current = true;
         scheduleNextSlide();
@@ -46,7 +46,7 @@ const ParallaxSlide = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // mount 직후에도 체크
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -151,7 +151,7 @@ const ParallaxSlide = () => {
               ref={(el) => {
                 if (el) smallImgRefs.current[`${key}-${i}`] = el;
               }}
-              data-speed={(i + 1) * 0.035}
+              data-speed={(i + 1) * 0.05}
             >
               <img src={smallItem} alt="small img" />
             </div>
