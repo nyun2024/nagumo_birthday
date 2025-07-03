@@ -267,8 +267,12 @@
         height: 555px;
       }
       .capturedImgWrap {
-        padding: 79px 199px 23px 18px;
+        padding: 79px 199px 23px 17px;
         gap: 9px;
+        img {
+          display: block;
+          height: 107px;
+        }
       }
     }
     .congratulationText {
