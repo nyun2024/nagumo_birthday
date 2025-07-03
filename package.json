@@ -14,7 +14,6 @@
   "dependencies": {
     "@hyvor/hyvor-talk-react": "^1.0.2",
     "classnames": "^2.5.1",
-    "disqus-react": "^1.1.6",
     "eslint-config-prettier": "^10.1.2",
     "gh-pages": "^6.3.0",
     "html2canvas": "^1.4.1",

@@ -119,8 +119,9 @@
   color: #000;
   @include font-style($font-eng, 16px, 400, #000);
   &:disabled {
-    background-color: #9d9d9d;
+    background-color: #ccc;
     color: #fff;
+    cursor: default;
   }
 }
 
