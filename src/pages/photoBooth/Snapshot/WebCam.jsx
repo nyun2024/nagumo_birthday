@@ -117,7 +117,7 @@ const WebCam = () => {
 
     const vw = video.videoWidth;
     const vh = video.videoHeight;
-    const scale = 2; // 원하는 배율 (2배 해상도)
+    const scale = 2;
 
     const cw = (canvas.width = video.clientWidth * scale);
     const ch = (canvas.height = video.clientHeight * scale);

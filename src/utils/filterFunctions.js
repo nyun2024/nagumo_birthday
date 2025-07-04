@@ -88,7 +88,7 @@ export const applyFilter = (imageData, filterName) => {
       }
       break;
 
-    case "juno":
+    case "juno": {
       const cosA = Math.cos((-10 * Math.PI) / 180);
       const sinA = Math.sin((-10 * Math.PI) / 180);
       const m = [
@@ -122,6 +122,7 @@ export const applyFilter = (imageData, filterName) => {
         data[i + 2] = Math.min(255, Math.max(0, b));
       }
       break;
+    }
 
     default:
       // "no filter" 또는 알 수 없는 경우 처리 없음

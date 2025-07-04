@@ -15,7 +15,7 @@ const Header = ({ mobile, isParallax }) => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > prevScrollY && currentScrollY > 50) {
-        // 스크롤 내리는 중 + 약간 내린 후
+        // 스크롤 내리는 중
         setIsVisible(false);
       } else {
         // 스크롤 올리는 중
@@ -68,7 +68,6 @@ const Header = ({ mobile, isParallax }) => {
     // useDarkMode 커스텀 이벤트 전송
     window.dispatchEvent(new Event("theme-change"));
   };
-  
 
   return (
     <>
@@ -82,7 +81,11 @@ const Header = ({ mobile, isParallax }) => {
         )}
       >
         <div className={styles.headerInner}>
-          <button type="button" className={styles.btnMenu} onClick={() => setNavOpen(true)}>
+          <button
+            type="button"
+            className={styles.btnMenu}
+            onClick={() => setNavOpen(true)}
+          >
             <span className="blind">navigation</span>
           </button>
           <Link to="/" className={styles.linkHome}></Link>
@@ -92,23 +95,27 @@ const Header = ({ mobile, isParallax }) => {
           </label>
         </div>
       </header>
-      {
-        navOpen &&
-        <div className={classNames(
-          styles.navPopup,
-          !mobile && styles.pc,
-          isDark && styles.dark
-        )}>
+      {navOpen && (
+        <div
+          className={classNames(
+            styles.navPopup,
+            !mobile && styles.pc,
+            isDark && styles.dark
+          )}
+        >
           <div className={styles.navPopupInner}>
             <div className={styles.navTop}>
-              <button className={classNames(styles.closeButton)} onClick={() => setNavOpen(false)}>
+              <button
+                className={classNames(styles.closeButton)}
+                onClick={() => setNavOpen(false)}
+              >
                 <span className="blind">close navigation</span>
               </button>
             </div>
             <Navigation />
           </div>
         </div>
-      }
+      )}
     </>
   );
 };

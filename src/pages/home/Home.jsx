@@ -36,7 +36,7 @@ const Home = () => {
     const isIntersecting =
       rect.top < viewportCenter && rect.bottom > viewportCenter;
 
-    const hasScrolled = window.scrollY > 10; // 10px 정도는 허용 범위로 봄
+    const hasScrolled = window.scrollY > 10;
 
     if (isIntersecting && !isNavVisible && hasScrolled) {
       document.querySelector("html").classList.add("parallax");
